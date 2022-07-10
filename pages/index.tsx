@@ -1,10 +1,8 @@
 // import type { GetStaticProps } from 'next';
-import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import HomePage, { IApiData } from '../components/main/home/HomePage';
-import { extractEmployeesDB, IUserInfo, pathToDB } from './api/feedback';
+import HomePage from '../components/main/home/HomePage';
 
-const Home = ({ data }: IApiData) => {
+const Home = () => {
   return (
     <>
       <Head>
@@ -12,20 +10,9 @@ const Home = ({ data }: IApiData) => {
         <meta name='keywords' content='home page' />
         <title>Home</title>
       </Head>
-      <HomePage data={data} />
+      <HomePage />
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const filePath = pathToDB();
-  const data: IUserInfo = extractEmployeesDB(filePath);
-
-  return {
-    props: {
-      data: data,
-    },
-  };
 };
 
 export default Home;

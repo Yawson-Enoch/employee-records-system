@@ -11,4 +11,8 @@ export const pages = [
     href: '/form',
     text: 'Form',
   },
+  {
+    href: '/feedback',
+    text: 'Feedback',
+  },
 ];

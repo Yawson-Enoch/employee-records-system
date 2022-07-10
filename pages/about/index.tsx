@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import AboutPage from '../components/main/about/AboutPage';
+import AboutPage from '../../components/main/about/AboutPage';
 
 const about = () => {
   return (

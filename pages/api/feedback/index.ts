@@ -1,21 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+import { writeFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-export interface IUserInfo {
-  id: string;
-  name: string;
-  email: string;
-}
-
-export const pathToDB = () => {
-  return path.join(process.cwd(), 'data', 'employees.json');
-};
-
-export const extractEmployeesDB = (path: string) => {
-  const readDbData = fs.readFileSync(path, 'utf8');
-  return JSON.parse(readDbData);
-};
+import { IUserInfo } from '../../../ts_ui';
+import { extractEmployeesDB, pathToDB } from '../../../utils';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const filePath = pathToDB();
@@ -46,7 +32,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       const data: IUserInfo[] = extractEmployeesDB(filePath);
       data.push(newUserInfo);
 
-      fs.writeFileSync(pathToDB(), JSON.stringify(data));
+      writeFileSync(filePath, JSON.stringify(data));
 
       return res.status(201).json({ message: 'info successfully added' });
     }

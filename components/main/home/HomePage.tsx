@@ -1,12 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { HomePageWrapper, Test } from './HomePage.styles';
-import { IUserInfo } from '../../../pages/api/feedback';
 
-export interface IApiData {
-  data: IUserInfo[];
-}
-
-const HomePage = ({ data }: IApiData) => {
+const HomePage = () => {
   const [color, setColor] = useState<string>('hotpink');
   // const [data, setData] = useState<IUserInfo[]>([]);
   // const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +15,7 @@ const HomePage = ({ data }: IApiData) => {
   //       if (!response.ok) {
   //         console.log('Something Went Wrong: Possible Server Error');
   //       }
-  //       const data: IApiData = await response.json();
+  //       const data: IUserInfoProp = await response.json();
   //       const { data: dataFromApi } = data;
   //       setData(dataFromApi);
   //     } catch (error: any) {
@@ -39,11 +34,6 @@ const HomePage = ({ data }: IApiData) => {
   return (
     <HomePageWrapper>
       <h1>HomePage</h1>
-      <ul>
-        {data.map(({ name, id }) => {
-          return <li key={id}>{name}</li>;
-        })}
-      </ul>
       <Test
         addColor={color}
         onClick={() => {

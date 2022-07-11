@@ -29,7 +29,9 @@ export const FormControl = styled.div`
 
   input {
     border-radius: var(--radius-xs);
-    color: ${({ theme }) => theme.bgColor};
+    background-color: transparent;
+    border: 2px solid gray;
+    color: ${({ theme }) => theme.textColor};
     padding: 0.2rem;
   }
 `;

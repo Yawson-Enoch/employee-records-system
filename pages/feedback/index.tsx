@@ -1,10 +1,7 @@
-import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import FeedbackPage from '../../components/main/feedback/FeedbackPage';
-import { IUserInfoProp, IUserInfo } from '../../ts_ui';
-import { extractEmployeesDB, pathToDB } from '../../utils';
 
-const FeedBack = ({ employees }: IUserInfoProp) => {
+const FeedBack = () => {
   return (
     <>
       <Head>
@@ -12,20 +9,20 @@ const FeedBack = ({ employees }: IUserInfoProp) => {
         <meta name='keywords' content='about page' />
         <title>Feedback</title>
       </Head>
-      <FeedbackPage employees={employees} />
+      <FeedbackPage />
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const filePath = pathToDB();
-  const data: IUserInfo[] = extractEmployeesDB(filePath);
+// export const getStaticProps: GetStaticProps = async () => {
+//   const filePath = pathToDB();
+//   const data: IUserInfo[] = extractEmployeesDB(filePath);
 
-  return {
-    props: {
-      employees: data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       employees: data,
+//     },
+//   };
+// };
 
 export default FeedBack;

@@ -7,3 +7,8 @@ export interface IUserInfo {
 export interface IUserInfoProp {
   employees: IUserInfo[];
 }
+
+export interface IApiDataProps {
+  message: string;
+  data: IUserInfo[];
+}

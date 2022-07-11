@@ -33,14 +33,14 @@ const feedBackId = () => {
   }, []);
 
   if (loading) {
-    <p>Data Is Loading....Please Wait.</p>;
+    <p style={{ textAlign: 'center' }}>Data Is Loading....Please Wait.</p>;
   }
 
   if (!userId) {
-    <p>No User Found</p>;
+    <p style={{ textAlign: 'center' }}>No User Found</p>;
   }
 
-  return <p>{userId}</p>;
+  return <p style={{ textAlign: 'center' }}>{userId}</p>;
 };
 
 export default feedBackId;

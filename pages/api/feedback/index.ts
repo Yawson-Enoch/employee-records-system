@@ -19,8 +19,14 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST': {
       const { name, email } = req.body;
 
-      if (!name || !email) {
-        return res.status(400).json({ message: 'bad user data' });
+      if (
+        !name ||
+        name.trim() === '' ||
+        !email ||
+        email.trim() === '' ||
+        !email.includes('@')
+      ) {
+        return res.status(400).json({ message: 'invalid user data' });
       }
 
       const newUserInfo = {
@@ -34,7 +40,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
       writeFileSync(filePath, JSON.stringify(data));
 
-      return res.status(201).json({ message: 'info successfully added' });
+      return res.status(201).json({
+        message: 'info successfully added',
+        data,
+      });
     }
 
     default: {

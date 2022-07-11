@@ -1,7 +1,11 @@
 import { FormEvent, useRef } from 'react';
+import { useEmployeesDbContext } from '../../../store/context/EmployeesDbContext';
+import { IApiDataProps } from '../../../ts_ui';
 import { FormControl, FormPageWrapper, UserForm } from './FormPage.styles';
 
 const FormPage = () => {
+  const { setEmployees } = useEmployeesDbContext();
+
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
 
@@ -24,10 +28,12 @@ const FormPage = () => {
           response.status
         );
       }
+      const data: IApiDataProps = await response.json();
+      const { data: dataFromApi } = data;
+      setEmployees(dataFromApi);
     } catch (error: any) {
       console.log(error.message);
     } finally {
-      console.log('Thanks');
       nameRef.current!.value = '';
       emailRef.current!.value = '';
     }
@@ -38,11 +44,11 @@ const FormPage = () => {
       <UserForm onSubmit={submitHandler}>
         <FormControl>
           <label htmlFor='name'>Name</label>
-          <input ref={nameRef} type='text' name='name' id='name' />
+          <input ref={nameRef} type='text' name='name' id='name' required />
         </FormControl>
         <FormControl>
           <label htmlFor='email'>Email</label>
-          <input ref={emailRef} type='email' name='email' id='email' />
+          <input ref={emailRef} type='email' name='email' id='email' required />
         </FormControl>
         <button type='submit'>SUBMIT</button>
       </UserForm>

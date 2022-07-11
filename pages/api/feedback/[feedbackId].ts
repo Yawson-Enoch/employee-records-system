@@ -1,14 +1,11 @@
 import { writeFileSync } from 'fs';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { IUserInfo } from '../../../ts_ui';
 import { extractEmployeesDB, pathToDB } from '../../../utils';
 
-const filePath = pathToDB();
+export const handler = (req: NextApiRequest, res: NextApiResponse) => {
+  const filePath = pathToDB();
 
-export const handler: NextApiHandler = (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
   const { feedbackId } = req.query;
   switch (req.method) {
     case 'GET': {
@@ -27,7 +24,7 @@ export const handler: NextApiHandler = (
           .status(200)
           .json({ message: 'success', data: singleUserInfo });
       } catch (error) {
-        return res.status(500).json({ message: 'Server Error' });
+        return res.status(500).json({ message: 'internal server error' });
       }
     }
 
@@ -47,7 +44,7 @@ export const handler: NextApiHandler = (
 
         return res.status(200).json({ message: 'user deleted successfully' });
       } catch (error) {
-        return res.status(500).json({ message: 'Server Error' });
+        return res.status(500).json({ message: 'internal server error' });
       }
     }
 

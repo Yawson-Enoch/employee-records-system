@@ -17,14 +17,14 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
         );
 
         if (!singleUserInfo) {
-          return res.status(404).json({ message: 'no matching ID' });
+          return res.status(404).json({ message: 'no matching user ID' });
         }
 
         return res
           .status(200)
           .json({ message: 'success', data: singleUserInfo });
       } catch (error) {
-        return res.status(500).json({ message: 'internal server error' });
+        return res.status(500).json({ message: 'error getting data from DB' });
       }
     }
 
@@ -39,12 +39,12 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
         writeFileSync(filePath, JSON.stringify(updateList));
 
         if (!updateList) {
-          return res.status(404).json({ message: 'no matching ID' });
+          return res.status(404).json({ message: 'no matching user ID' });
         }
 
         return res.status(200).json({ message: 'user deleted successfully' });
       } catch (error) {
-        return res.status(500).json({ message: 'internal server error' });
+        return res.status(500).json({ message: 'error deleting user' });
       }
     }
 

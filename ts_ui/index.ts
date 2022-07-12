@@ -2,6 +2,8 @@ export interface IUserInfo {
   id: string;
   name: string;
   email: string;
+  addedTime: string;
+  addedDate: string;
 }
 
 export interface IUserInfoProp {

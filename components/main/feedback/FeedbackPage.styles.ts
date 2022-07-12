@@ -22,10 +22,10 @@ export const FeedbackPageWrapper = styled.div`
       padding: 2rem;
       border-radius: var(--radius-md);
       display: grid;
-      grid-template-columns: 4fr 3fr 2fr 1fr;
+      grid-template-columns: 1fr 3fr 3fr 1fr 2fr 1fr;
       align-items: center;
       gap: var(--gap-md);
-      /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); */
+      /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
     }
   }
 `;

@@ -9,3 +9,23 @@ export const extractEmployeesDB = (path: string) => {
   const readDbData = readFileSync(path, 'utf8');
   return JSON.parse(readDbData);
 };
+
+export const formatDate = (date = new Date()): string => {
+  const { format } = new Intl.DateTimeFormat('en-UK', { dateStyle: 'full' });
+  return format(date).toString();
+};
+
+export const formatTime = (time = new Date()): string => {
+  const { format } = new Intl.DateTimeFormat('en-US', { timeStyle: 'short' });
+  return format(time).toString();
+};
+
+export const checkEmailValidity = (email: string) => {
+  const regex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  return regex.test(email);
+};
+
+export const capitalizeFirstLetter = (word: string) => {
+  return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+};

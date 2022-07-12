@@ -18,8 +18,8 @@ const FormPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: nameRef.current?.value.trim(),
-          email: emailRef.current?.value.trim(),
+          name: nameRef.current?.value.trim().toLowerCase(),
+          email: emailRef.current?.value.trim().toLowerCase(),
         }),
       });
       if (!response.ok) {

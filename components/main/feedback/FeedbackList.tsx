@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 import { FaTrash } from 'react-icons/fa';
 import { useEmployeesDbContext } from '../../../store/context/EmployeesDbContext';
-import { IApiDataProps, IUserInfo } from '../../../ts_ui';
+import { IUserInfo } from '../../../ts_ui';
 import { DeleteButton, GoToDetailsButton } from './FeedbackPage.styles';
 
-const FeedbackList = ({ id, name, email }: IUserInfo) => {
+const FeedbackList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   const { employees, setEmployees } = useEmployeesDbContext();
   const router = useRouter();
 
@@ -22,10 +22,8 @@ const FeedbackList = ({ id, name, email }: IUserInfo) => {
       });
 
       if (!response.ok) {
-        console.log(
-          'Something Went Wrong: Possible Server Error',
-          response.status
-        );
+        // 'Something Went Wrong: Log server error message: {message: ........provided by server from response.json()}',
+        console.log(response.status);
       }
     } catch (error: any) {
       console.log(error.message);
@@ -38,6 +36,8 @@ const FeedbackList = ({ id, name, email }: IUserInfo) => {
     <li key={id}>
       <p>{name}</p>
       <p>{email}</p>
+      <p>{addedDate}</p>
+      <p>{addedTime}</p>
 
       <GoToDetailsButton type='button' onClick={() => goToDetails(id)}>
         Go To Details

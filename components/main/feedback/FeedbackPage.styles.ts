@@ -12,7 +12,6 @@ export const FeedbackPageWrapper = styled.div`
   }
 
   ul {
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -34,7 +33,7 @@ export const GoToDetailsButton = styled.button`
   background-color: transparent;
   border: 1px solid blueviolet;
   border-radius: 7px;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0.5rem;
   height: 3.5rem;
 `;
 export const DeleteButton = styled.button`
@@ -42,9 +41,10 @@ export const DeleteButton = styled.button`
   color: red;
   border: 1px solid red;
   height: 3.5rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;

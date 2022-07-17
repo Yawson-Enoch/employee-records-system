@@ -6,7 +6,7 @@ const Footer = () => {
     <FooterWrapper>
       <FooterContent>
         <p>
-          &copy; <span>{year}</span>
+          &copy; <span>{year} | GROUP 37</span>
         </p>
       </FooterContent>
     </FooterWrapper>

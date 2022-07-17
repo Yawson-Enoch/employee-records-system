@@ -7,10 +7,16 @@ import {
   formatDate,
   formatTime,
   checkEmailValidity,
-  capitalizeFirstLetter,
+  checkNameValidity,
+  capitalizeFirstLetterOfWords,
 } from '../../../utils';
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+interface IData {
+  message: string;
+  data?: IUserInfo[];
+}
+
+const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
   const filePath = pathToDB();
 
   switch (req.method) {
@@ -29,15 +35,21 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     case 'POST': {
-      const { name, email } = req.body;
+      const { firstName, lastName, email } = req.body;
 
-      if (!name || name.trim() === '' || !checkEmailValidity(email)) {
+      if (
+        !checkNameValidity(firstName) ||
+        !checkNameValidity(lastName) ||
+        !checkEmailValidity(email)
+      ) {
         return res.status(400).json({ message: 'invalid user data' });
       }
 
+      const concatNames = `${firstName} ${lastName}`;
+
       const newUserInfo = {
         id: Date.now().toString(),
-        name: capitalizeFirstLetter(name),
+        name: capitalizeFirstLetterOfWords(concatNames),
         email,
         addedDate: formatDate(),
         addedTime: formatTime(),

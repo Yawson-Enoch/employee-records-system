@@ -5,11 +5,9 @@ import {
   HeaderContent,
   HeaderWrapper,
   Logo,
-  NavLinks,
   ThemeToggler,
   ThemeTogglerAndNav,
 } from './Header.styles';
-import { pages } from './pages';
 
 const Header = () => {
   const { theme, switchTheme } = useThemeContext();
@@ -18,7 +16,7 @@ const Header = () => {
       <HeaderContent>
         <Link href='/'>
           <a>
-            <Logo>GYBEX</Logo>
+            <Logo>Employee Records System</Logo>
           </a>
         </Link>
         <ThemeTogglerAndNav>
@@ -27,21 +25,6 @@ const Header = () => {
               {theme === 'dark' ? <FaSun /> : <FaMoon />}
             </button>
           </ThemeToggler>
-
-          <nav>
-            <NavLinks>
-              {pages.map((page, index) => {
-                const { href, text } = page;
-                return (
-                  <li key={index}>
-                    <Link href={href}>
-                      <a>{text}</a>
-                    </Link>
-                  </li>
-                );
-              })}
-            </NavLinks>
-          </nav>
         </ThemeTogglerAndNav>
       </HeaderContent>
     </HeaderWrapper>

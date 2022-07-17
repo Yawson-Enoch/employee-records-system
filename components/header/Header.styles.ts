@@ -1,15 +1,17 @@
 import styled from 'styled-components';
-import { ContentWrapper } from '../../styles/utils/ContentWrapper';
+import { Wrapper } from '../../styles/utils';
 
 export const HeaderWrapper = styled.header`
-  border-bottom: 1px solid;
+  display: grid;
+  align-content: center;
+  border-bottom: 1px solid gray;
 `;
 export const HeaderContent = styled.div`
-  ${ContentWrapper}
+  ${Wrapper}
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--gap-lg) 0;
+  padding: var(--gap-xs) 0;
 `;
 
 export const Logo = styled.p`
@@ -40,20 +42,6 @@ export const ThemeToggler = styled.div`
 
     svg {
       color: ${({ theme }) => theme.textColor};
-    }
-  }
-`;
-
-export const NavLinks = styled.ul`
-  display: flex;
-  gap: var(--gap-md);
-
-  a {
-    color: var(--blue-400);
-    transition: var(--transition-3s);
-
-    &:hover {
-      color: var(--blue-300);
     }
   }
 `;

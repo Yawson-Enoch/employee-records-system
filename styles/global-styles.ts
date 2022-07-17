@@ -98,7 +98,7 @@ export const GlobalStyles = createGlobalStyle`
   --gap-xs: var(--fs-xs);
   --gap-md: var(--fs-p);
   --gap-lg: var(--fs-h1);
-  --max-width: 1024px;
+  --max-width: 1200px;
   --transition-3s: 0.3s ease-in-out;
   --transition-5s: 0.5s ease-in-out;
 }
@@ -159,10 +159,7 @@ p {
 }
 
 :where(input, textarea, select, label, button) {
-  display: block;
   font: inherit;
-  color: inherit;
-  /* cursor: pointer; */
 }
 
 img,

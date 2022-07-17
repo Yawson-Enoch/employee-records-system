@@ -1,16 +1,16 @@
 import { useRouter } from 'next/router';
 import { FaTrash } from 'react-icons/fa';
-import { useEmployeesDbContext } from '../../../store/context/EmployeesDbContext';
-import { IUserInfo } from '../../../ts_ui';
-import { DeleteButton, GoToDetailsButton } from './FeedbackPage.styles';
+import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
+import { IUserInfo } from '../../ts_ui';
+import { DeleteButton, GoToDetailsButton } from './HomePage.styles';
 
-const FeedbackList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
+const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   const { employees, setEmployees } = useEmployeesDbContext();
-  const router = useRouter();
+  // const router = useRouter();
 
-  const goToDetails = (id: string) => {
-    router.push(`/feedback/${id}`);
-  };
+  // const goToDetails = (id: string) => {
+  //   router.push(`/feedback/${id}`);
+  // };
 
   const deleteHandler = async (id: string) => {
     const newData = employees.filter((employee) => employee.id !== id);
@@ -39,9 +39,9 @@ const FeedbackList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
       <p>{addedDate}</p>
       <p>{addedTime}</p>
 
-      <GoToDetailsButton type='button' onClick={() => goToDetails(id)}>
+      {/* <GoToDetailsButton type='button' onClick={() => goToDetails(id)}>
         Go To Details
-      </GoToDetailsButton>
+      </GoToDetailsButton> */}
 
       <DeleteButton onClick={() => deleteHandler(id)}>
         <FaTrash />
@@ -50,4 +50,4 @@ const FeedbackList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   );
 };
 
-export default FeedbackList;
+export default EmployeeList;

@@ -1,40 +1,38 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+/* pt-serif */
 @font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'),
-    url('/fonts/poppins/Poppins-Regular.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 400;
-    font-display: fallback;
+	font-family: 'PT Serif';
+	font-style: normal;
+	font-weight: 400;
+	src: local("PT Serif"), local("PTSerif-Regular"), url('/fonts/pt-serif/pt-serif.woff') format("woff");
+	font-display: fallback;
+}
+/* pt-serif-italic */
+@font-face {
+	font-family: 'PT Serif';
+	font-style: italic;
+	font-weight: 400;
+	src: local("PT Serif Italic"), local("PTSerif-Italic"), url('/fonts/pt-serif/pt-serif-italic.woff') format("woff");
+	font-display: fallback;
 }
 
+/* poppins-bold */
 @font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'),
-    url('/fonts/poppins/Poppins-Bold.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 700;
-  font-display: fallback;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: 700;
+	src: local("Poppins Bold"), local("Poppins-Bold"), url('/fonts/poppins/poppins-bold.woff') format("woff");
+	font-display: fallback;
 }
-
+/* poppins-bold-italic */
 @font-face {
-  font-family: 'PT Serif';
-  src: local('PT Serif'),
-    url('/fonts/pt-serif/PTSerif-Regular.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: 'PT Serif';
-  src: local('PT Serif'),
-    url('/fonts/pt-serif/PTSerif-Italic.ttf') format('truetype');
-  font-style: italic;
-  font-weight: 400;
-  font-display: fallback;
+	font-family: Poppins;
+	font-style: italic;
+	font-weight: 700;
+	src: local("Poppins Bold Italic"), local("Poppins-BoldItalic"), url('/fonts/poppins/poppins-bold-italic.woff') format("woff");
+	font-display: fallback;
 }
 
 :root {
@@ -50,17 +48,6 @@ export const GlobalStyles = createGlobalStyle`
   --blue-800: #000066;
   --blue-900: #000033;
 
-  // orange
-  --orange-100: #ffedcc;
-  --orange-200: #ffdb99;
-  --orange-300: #ffc966;
-  --orange-400: #ffb733;
-  --orange-500: #ffa500;
-  --orange-600: #cc8400;
-  --orange-700: #996300;
-  --orange-800: #664200;
-  --orange-900: #332100;
-
   // grey
   --grey-100: #f1f5f9;
   --grey-200: #e2e8f0;
@@ -73,34 +60,65 @@ export const GlobalStyles = createGlobalStyle`
   --grey-900: #0f172a;
 
   // rest of the colors
-  --black: #000000;
-  --white: #ffffff;
-  --error: #842029;
-  --success: #0f5132;
+  --clr-black: #000000;
+  --clr-white: #ffffff;
+  --clr-error: #cc0000;
+  --clr-success: #005a00;
+  --clr-backdrop: rgba(0, 0, 0, 0.5);
+  --clr-accent-primary:  #88528F;
+  --clr-accent-secondary: #06969a;
+  --gradient-primary: linear-gradient(
+    45deg,
+    var(--clr-accent-primary),
+    var(--clr-accent-secondary)
+  );
 
   // fonts
+  /* font family */
   --ff-heading: 'Poppins', sans-serif;
   --ff-body: 'PT Serif', serif;
-  /* --ff-body: system-ui,'Poppins', sans-serif; */
 
-  --fs-h1: clamp(2.7rem, 2.5rem + 2.5vw, 3.2rem);
-  --fs-h2: clamp(2rem, 1.8rem + 1.8vw, 2.5rem);
-  --fs-p: clamp(1.5rem, 1.1rem + 1.1vw, 1.8rem);
-  --fs-xs: clamp(0.8rem, 0.5rem + 0.5vw, 1.1rem);
+  /* font size */
+  --fs-large: clamp(2.2rem, 1.4rem + 1.4vw, 2.6rem);
+  --fs-medium: clamp(1.6rem, 1.2rem + 1.2vw, 2rem);
+  --fs-small: clamp(1.4rem, 0.7rem + 0.7vw, 1.8rem);
+  --fs-xtra-small: clamp(0.8rem, 0.5rem + 0.5vw, 1.2rem);
 
   // page-specific variables
-  --clr-bg: var(--grey-100);
-  --clr-text: var(--grey-800);
-  --radius-xs: 0.5rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
+  --radius-xtra-small: 0.2rem;
+  --radius-small: 0.5rem;
+  --radius-medium: 1rem;
+  --radius-large: 1.5rem;
   --radius-round: 50%;
-  --gap-xs: var(--fs-xs);
-  --gap-md: var(--fs-p);
-  --gap-lg: var(--fs-h1);
-  --max-width: 1200px;
+  --space-xtra-small: var(--fs-xtra-small);
+  --space-small: var(--fs-small);
+  --space-medium: var(--fs-medium);
+  --space-large: var(--fs-large);
+  --max-width: 1024px;
   --transition-3s: 0.3s ease-in-out;
   --transition-5s: 0.5s ease-in-out;
+}
+
+body[data-theme='light'] {
+  --clr-primary: var(--grey-100);
+  --clr-secondary: var(--grey-800);
+  --clr-accent-tertiary: rgb(212, 228, 250);
+  --border-primary: 4px solid rgba(0, 0, 0, 0.15);
+  --box-shadow-outside: 4px 4px 4px var(--grey-200),
+    -4px -4px 4px var(--grey-400);
+  --box-shadow-inside: inset 4px 4px 4px var(--grey-200),
+    inset -4px -4px 4px var(--grey-400);
+}
+
+body[data-theme='dark'] {
+  --clr-primary: var(--grey-900);
+  --clr-secondary: var(--grey-200);
+  --clr-accent-tertiary: rgb(1, 5, 15);
+  --border-primary: 4px solid rgba(255, 255, 255, 0.05);
+  --box-shadow-outside: 4px 4px 4px var(--clr-black),
+    -4px -4px 4px var(--grey-900);
+  --box-shadow-inside: inset 4px 4px 4px var(--clr-black),
+    inset -4px -4px 4px var(--grey-900);
 }
 
 html {
@@ -134,36 +152,40 @@ html {
 }
 
 :focus-visible {
-  outline: 2px solid var(--blue-500);
+  outline: 1px solid var(--clr-accent-primary);
 }
 
 body {
   font-family: var(--ff-body);
-  font-size: var(--fs-p);
-  background: ${({ theme }) => theme.bgColor};
-  color: ${({ theme }) => theme.textColor};
+  font-size: var(--fs-small);
+  background-color: var(--clr-primary);
+  color: var(--clr-secondary);
   min-height: 100vh;
   overflow-x: hidden;
-  gap: var(--gap-lg);
+  /* display: grid;
+  align-content: space-between;
+  grid-auto-rows: minmax(7rem, auto); */
 }
 
 p {
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--ff-heading);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
 :where(input, textarea, select, label, button) {
   font: inherit;
+  cursor: pointer;
 }
 
 img,
-picture {
+picture, 
+svg {
   display: block;
   max-width: 100%;
 }
@@ -178,32 +200,15 @@ a {
 }
 
 h1 {
-  font-size: var(--fs-h1);
+  font-size: var(--fs-large);
 }
 
 h2 {
-  font-size: var(--fs-h2);
+  font-size: var(--fs-medium);
 }
 
 p,
 a {
-  font-size: var(--fs-p);
+  font-size: var(--fs-small);
 }
-
-.close{
-  transform: translate(-50%, -50%) scale(0);
-  z-index: -20;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.animate {
-  transform: translate(-50%, -50%) scale(1);
-  z-index: 20;
-  visibility: visible;
-  opacity: 1;
-  pointer-events: all;
-}
-
 `;

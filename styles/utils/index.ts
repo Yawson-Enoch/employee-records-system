@@ -13,6 +13,6 @@ export const Center = css`
 
 export const FlowContent = css`
   > :where(:not(:first-child)) {
-    margin-top: var(--fs-p);
+    margin-top: var(--fs-medium);
   }
 `;

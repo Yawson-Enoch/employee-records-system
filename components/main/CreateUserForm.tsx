@@ -38,7 +38,7 @@ const CreateUserForm = () => {
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/feedback', {
+      const response = await fetch('/api/employees', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',

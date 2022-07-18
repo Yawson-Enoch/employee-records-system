@@ -10,52 +10,52 @@ export const TitlesContainer = styled.ul`
   grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
   align-items: center;
   justify-items: center;
-  gap: var(--gap-md);
-  padding: 1rem;
-  border-radius: var(--radius-md);
-  background: linear-gradient(to left, hotpink, royalblue);
+  gap: var(--space-xtra-small);
+  padding: 1rem 0;
+  border-radius: var(--radius-medium);
+  border: 2px solid var(--grey-500);
+  background: var(--gradient-primary);
 `;
 
 export const EmployeesData = styled.ul`
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--space-xtra-small);
 
   li {
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
     align-items: center;
     justify-items: center;
-    gap: var(--gap-md);
-    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
-    border: 1px solid ${({ theme }) => theme.textColor};
-    padding: 1rem;
-    border-radius: var(--radius-md);
+    gap: var(--space-small);
+    border: 2px solid var(--grey-500);
+    padding: 1rem 0;
+    border-radius: var(--radius-medium);
+    transition: border 0.3s linear;
 
     &:hover {
-      border: 1px solid blueviolet;
+      border: 2px solid var(--clr-accent-secondary);
     }
   }
 `;
 
 export const GoToDetailsButton = styled.button`
   background-color: transparent;
-  border: 1px solid blueviolet;
-  border-radius: 7px;
+  border: 1px solid var(--clr-accent-secondary);
+  border-radius: var(--radium-medium);
   padding: 0.3rem 0.5rem;
   height: 3.5rem;
-  color: ${({ theme }) => theme.textColor};
+  color: var(--clr-secondary);
 `;
 export const DeleteButton = styled.button`
   background-color: transparent;
-  color: red;
-  border: 1px solid red;
+  color: var(--clr-error);
+  border: 2px solid var(--clr-error);
   height: 3.5rem;
-  padding: 0.3rem 3rem;
-  border-radius: 7px;
+  padding: 0.3rem 1.5rem;
+  border-radius: var(--radius-medium);
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 `;

@@ -4,21 +4,22 @@ import { FlowContent } from '../../styles/utils';
 export const FormContainer = styled.section`
   width: 50%;
   margin-inline: auto;
-  padding-bottom: 3rem;
+  padding-bottom: var(--space-small);
   position: absolute;
   left: 50%;
   top: 50%;
-  padding: var(--gap-md);
-  border-radius: var(--radius-xs);
+  padding: var(--space-medium);
+  border-radius: var(--radius-medium);
   transform: translate(-50%, -50%);
   z-index: 20;
-  background-color: ${({ theme }) => theme.bgColor};
+  background-color: var(--clr-primary);
+  border: 2px solid var(--grey-500);
 `;
 
 export const FormContainerDetails = styled.div`
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
   p {
-    font-size: var(--fs-h1);
+    font-size: var(--fs-large);
   }
 `;
 export const Form = styled.form`
@@ -28,26 +29,27 @@ export const Form = styled.form`
 export const FormBtnContainer = styled.div`
   display: flex;
   justify-content: end;
-  gap: 2rem;
+  gap: var(--space-small);
+
+  button {
+    outline: none;
+    background-color: transparent;
+    border-radius: var(--radius-medium);
+    padding: 0.5rem 1rem;
+    transition: opacity 0.3s linear;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 
   button[type='submit'] {
-    border: 2px solid blue;
-    outline: none;
-    padding: 0.5rem 1rem;
-    background-color: transparent;
-    color: blue;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    /* color: ${({ theme }) => theme.textColor}; */
+    border: 2px solid var(--blue-500);
+    color: var(--blue-500);
   }
 
   button:nth-of-type(1) {
-    border: 2px solid hsl(0, 100%, 50%);
-    outline: none;
-    padding: 0.5rem 1rem;
-    background-color: transparent;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    color: hsl(0, 100%, 50%);
+    border: 2px solid var(--clr-error);
+    color: var(--clr-error);
   }
 `;

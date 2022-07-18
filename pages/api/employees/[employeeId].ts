@@ -6,14 +6,14 @@ import { extractEmployeesDB, pathToDB } from '../../../utils';
 export const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const filePath = pathToDB();
 
-  const { feedbackId } = req.query;
+  const { employeeId } = req.query;
   switch (req.method) {
     case 'GET': {
       try {
         const data: IUserInfo[] = extractEmployeesDB(filePath);
 
         const singleUserInfo = data.find(
-          (employee) => employee.id === feedbackId
+          (employee) => employee.id === employeeId
         );
 
         if (!singleUserInfo) {
@@ -33,7 +33,7 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
         const data: IUserInfo[] = extractEmployeesDB(filePath);
 
         const updateList = data.filter(
-          (employee) => employee.id !== feedbackId
+          (employee) => employee.id !== employeeId
         );
 
         writeFileSync(filePath, JSON.stringify(updateList));

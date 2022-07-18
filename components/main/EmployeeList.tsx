@@ -9,7 +9,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   // const router = useRouter();
 
   // const goToDetails = (id: string) => {
-  //   router.push(`/feedback/${id}`);
+  //   router.push(`/employees/${id}`);
   // };
 
   const deleteHandler = async (id: string) => {
@@ -17,7 +17,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
     updateEmployees(newData);
 
     try {
-      const response = await fetch(`/api/feedback/${id}`, {
+      const response = await fetch(`/api/employees/${id}`, {
         method: 'DELETE',
       });
 

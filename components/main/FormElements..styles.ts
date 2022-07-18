@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 
 export const FormField = styled.div<{ focused: boolean }>`
-  /* display: grid;
-grid-template-columns: 1fr 2fr;
-grid-auto-rows: 3.5rem; */
-  /* transition: all 0.3s; */
-
   label {
     display: block;
-    color: ${({ theme }) => theme.textColor};
+    color: var(--clr-secondary);
     transform: translateY(-2.5rem);
     transform-origin: 0 0;
     transition: transform 0.3s;
@@ -18,20 +13,15 @@ grid-auto-rows: 3.5rem; */
   input {
     width: 100%;
     background-color: transparent;
-    color: ${({ theme }) => theme.textColor};
-    border-color: ${({ theme }) => theme.textColor};
+    color: var(--clr-secondary);
+    border-color: var(--clr-secondary);
     box-shadow: none;
     border-radius: 0;
     border-width: 1px;
     border-style: none none solid none;
     transition: border-color 0.3s;
-    caret-color: ${({ theme }) => theme.textColor};
+    caret-color: var(--clr-secondary);
     padding-bottom: 0.2rem;
-    /* border-radius: var(--radius-xs);
-  border: 2px solid blue;
-  border: 2px solid blue;
-  padding: 0.2rem 0.3rem;
-  */
   }
 
   input::placeholder {
@@ -40,11 +30,11 @@ grid-auto-rows: 3.5rem; */
 
   input:focus {
     outline: none;
-    border-color: blue;
+    border-color: var(--blue-500);
   }
 
   input:focus + label {
-    color: blue;
+    color: var(--blue-500);
     opacity: 1;
   }
 
@@ -53,28 +43,19 @@ grid-auto-rows: 3.5rem; */
     transform: translate(-0.05rem, -4.7rem) scale(0.8);
   }
 
-  /* input:focus-within {
-  transform: scale(1.02);
-} */
-
   div {
     opacity: 0;
     pointer-events: none;
-    color: hsl(0, 100%, 50%);
+    color: var(--clr-error);
     transform: translateY(-1.5rem);
     font-size: 1.5rem;
   }
 
   input:invalid {
-    border-color: ${({ focused }) => focused && 'hsl(0, 100%, 50%)'};
+    border-color: ${({ focused }) => focused && 'var(--clr-error)'};
     ~ div {
       pointer-events: ${({ focused }) => focused && 'all'};
       opacity: ${({ focused }) => focused && 1};
     }
   }
-
-  /* input:invalid ~ div {
-    pointer-events: ${({ focused }) => focused && 'all'};
-    opacity: ${({ focused }) => focused && 1};
-  } */
 `;

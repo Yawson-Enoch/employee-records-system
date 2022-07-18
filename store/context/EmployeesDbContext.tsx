@@ -30,7 +30,7 @@ const EmployeesDbContextProvider = ({
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('/api/feedback');
+        const response = await fetch('/api/employees');
         if (!response.ok) {
           console.log('Something Went Wrong: Possible Server Error');
         }

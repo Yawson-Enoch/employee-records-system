@@ -27,7 +27,7 @@ export const checkEmailValidity = (email: string) => {
 };
 
 export const checkNameValidity = (name: string) => {
-  const regex = /^[A-Za-z0-9]{5,35}$/;
+  const regex = /^[A-Za-z0-9]{2,16}$/;
   return regex.test(name);
 };
 

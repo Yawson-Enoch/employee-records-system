@@ -54,17 +54,13 @@ const CreateUserForm = () => {
           // add a div to bottom of form and display 'api' error message - message: {'could not insert data'}
         );
       }
-      closeFormAndModal();
       const data: IApiDataProps = await response.json();
       const { data: dataFromApi } = data;
       updateEmployees(dataFromApi);
-      // remove form modal
+      closeFormAndModal();
     } catch (error: any) {
       // add a div to bottom of form and display 'fetch' error message - network error
       console.log(error.message);
-    } finally {
-      setUsers({ firstName: '', lastName: '', email: '' });
-      // remove finally
     }
   };
 
@@ -128,57 +124,3 @@ const CreateUserForm = () => {
 };
 
 export default CreateUserForm;
-
-// type dynamicKey = keyof typeof users;
-{
-  /* <FormField>
-          <input
-            type='text'
-            name='firstName'
-            value={users.firstName}
-            id='firstname'
-            required
-            pattern='^[A-Za-z0-9]{2,16}$'
-            onChange={changeHandler}
-            onBlur={focusAndLeaveHandler}
-            placeholder='Your First Name'
-          />
-          <label htmlFor='firstname'>First Name</label>
-          <div>
-            Username should be 2-16 characters and shouldn't include any special
-            characters.
-          </div>
-        </FormField>
-        <FormField>
-          <input
-            type='text'
-            name='lastName'
-            value={users.lastName}
-            id='lastname'
-            required
-            pattern='^[A-Za-z0-9]{2,16}$'
-            onChange={changeHandler}
-            onBlur={focusAndLeaveHandler}
-            placeholder='Your Last Name'
-          />
-          <label htmlFor='lastname'>Last Name</label>
-          <div>
-            Username should be 2-16 characters and shouldn't include any special
-            characters.
-          </div>
-        </FormField>
-        <FormField>
-          <input
-            type='email'
-            name='email'
-            value={users.email}
-            id='email'
-            required
-            onChange={changeHandler}
-            onBlur={focusAndLeaveHandler}
-            placeholder='name@gmail.com'
-          />
-          <label htmlFor='email'>Email</label>
-          <div>Email is invalid.</div>
-        </FormField> */
-}

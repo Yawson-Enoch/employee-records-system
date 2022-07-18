@@ -1,6 +1,5 @@
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FormField } from './FormElements..styles';
-
 interface IFormElements {
   placeholder: string;
   type: string;
@@ -18,9 +17,7 @@ const FormElements = (props: IFormElements) => {
   const [focusRemove, setFocusRemove] = useState(false);
 
   const focusAndLeaveHandler = () => {
-    setTimeout(() => {
-      setFocusRemove(true);
-    }, 500);
+    setFocusRemove(true);
   };
 
   return (

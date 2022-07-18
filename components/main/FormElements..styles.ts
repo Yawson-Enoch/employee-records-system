@@ -58,12 +58,23 @@ grid-auto-rows: 3.5rem; */
 } */
 
   div {
-    display: none;
-    color: hsl(0, 100%, 30%);
+    opacity: 0;
+    pointer-events: none;
+    color: hsl(0, 100%, 50%);
     transform: translateY(-1.5rem);
+    font-size: 1.5rem;
   }
 
-  input:invalid ~ div {
-    display: ${({ focused }) => focused && 'block'};
+  input:invalid {
+    border-color: ${({ focused }) => focused && 'hsl(0, 100%, 50%)'};
+    ~ div {
+      pointer-events: ${({ focused }) => focused && 'all'};
+      opacity: ${({ focused }) => focused && 1};
+    }
   }
+
+  /* input:invalid ~ div {
+    pointer-events: ${({ focused }) => focused && 'all'};
+    opacity: ${({ focused }) => focused && 1};
+  } */
 `;

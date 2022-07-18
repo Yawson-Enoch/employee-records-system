@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
+import { useModalContext } from '../../store/context/ModalContext';
 import { IApiDataProps } from '../../ts_ui';
 import {
   Form,
@@ -17,7 +18,8 @@ interface IFormValues {
 type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
-  const { setEmployees } = useEmployeesDbContext();
+  const { closeFormAndModal } = useModalContext();
+  const { updateEmployees } = useEmployeesDbContext();
   const [users, setUsers] = useState<IFormValues>({
     firstName: '',
     lastName: '',
@@ -52,9 +54,10 @@ const CreateUserForm = () => {
           // add a div to bottom of form and display 'api' error message - message: {'could not insert data'}
         );
       }
+      closeFormAndModal();
       const data: IApiDataProps = await response.json();
       const { data: dataFromApi } = data;
-      setEmployees(dataFromApi);
+      updateEmployees(dataFromApi);
       // remove form modal
     } catch (error: any) {
       // add a div to bottom of form and display 'fetch' error message - network error
@@ -72,6 +75,7 @@ const CreateUserForm = () => {
       type: 'text',
       placeholder: 'Your First Name',
       pattern: '^[A-Za-z0-9]{2,16}$',
+      autofocus: true,
       labelText: 'First Name',
       errorMessage: `Username should be 2-16 characters and shouldn't include any special
       characters.`,
@@ -113,6 +117,9 @@ const CreateUserForm = () => {
           );
         })}
         <FormBtnContainer>
+          <button type='button' onClick={closeFormAndModal}>
+            Close
+          </button>
           <button type='submit'>Submit</button>
         </FormBtnContainer>
       </Form>

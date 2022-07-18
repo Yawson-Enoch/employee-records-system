@@ -1,8 +1,6 @@
 import {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useContext,
   useEffect,
   useState,
@@ -11,7 +9,7 @@ import { IApiDataProps, IUserInfo } from '../../ts_ui';
 
 interface IEmployeesDbContextProps {
   employees: IUserInfo[];
-  setEmployees: Dispatch<SetStateAction<IUserInfo[]>>;
+  updateEmployees(data: IUserInfo[]): void;
   isLoading: boolean;
 }
 
@@ -48,11 +46,15 @@ const EmployeesDbContextProvider = ({
     fetchData();
   }, []);
 
+  const updateEmployees = (data: IUserInfo[]) => {
+    setEmployees(data);
+  };
+
   return (
     <EmployeesDbContext.Provider
       value={{
         employees,
-        setEmployees,
+        updateEmployees,
         isLoading,
       }}
     >

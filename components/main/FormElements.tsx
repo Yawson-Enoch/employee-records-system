@@ -10,6 +10,7 @@ interface IFormElements {
   labelText: string;
   errorMessage: string;
   pattern?: string;
+  autofocus?: boolean;
   onChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void;
 }
 
@@ -17,7 +18,9 @@ const FormElements = (props: IFormElements) => {
   const [focusRemove, setFocusRemove] = useState(false);
 
   const focusAndLeaveHandler = () => {
-    setFocusRemove(true);
+    setTimeout(() => {
+      setFocusRemove(true);
+    }, 500);
   };
 
   return (
@@ -32,6 +35,7 @@ const FormElements = (props: IFormElements) => {
         pattern={props?.pattern}
         onChange={props.onChange}
         onBlur={focusAndLeaveHandler}
+        autoFocus={props.autofocus}
       />
       <label htmlFor={props.id}>{props.labelText}</label>
       <div>{props.errorMessage}</div>

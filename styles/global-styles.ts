@@ -189,4 +189,21 @@ p,
 a {
   font-size: var(--fs-p);
 }
+
+.close{
+  transform: translate(-50%, -50%) scale(0);
+  z-index: -20;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.animate {
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 20;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
 `;

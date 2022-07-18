@@ -3,9 +3,6 @@ import { Wrapper } from '../../styles/utils';
 
 export const HomepageWrapper = styled.div`
   ${Wrapper}
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
 `;
 
 export const TitlesContainer = styled.ul`
@@ -16,10 +13,11 @@ export const TitlesContainer = styled.ul`
   gap: var(--gap-md);
   padding: 1rem;
   border-radius: var(--radius-md);
-  background-color: blue;
+  background: linear-gradient(to left, hotpink, royalblue);
 `;
 
 export const EmployeesData = styled.ul`
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;

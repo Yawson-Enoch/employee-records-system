@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Layout from '../layout/Layout';
 import { EmployeesDbContextProvider } from '../store/context/EmployeesDbContext';
+import { ModalContextProvider } from '../store/context/ModalContext';
 import { AppThemeProvider } from '../styles/AppThemeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,11 +15,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
       </Head>
       <AppThemeProvider>
-        <EmployeesDbContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </EmployeesDbContextProvider>
+        <ModalContextProvider>
+          <EmployeesDbContextProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </EmployeesDbContextProvider>
+        </ModalContextProvider>
       </AppThemeProvider>
     </>
   );

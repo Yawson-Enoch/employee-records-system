@@ -5,7 +5,7 @@ import { IUserInfo } from '../../ts_ui';
 import { DeleteButton, GoToDetailsButton } from './HomePage.styles';
 
 const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
-  const { employees, setEmployees } = useEmployeesDbContext();
+  const { employees, updateEmployees } = useEmployeesDbContext();
   // const router = useRouter();
 
   // const goToDetails = (id: string) => {
@@ -14,7 +14,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
 
   const deleteHandler = async (id: string) => {
     const newData = employees.filter((employee) => employee.id !== id);
-    setEmployees(newData);
+    updateEmployees(newData);
 
     try {
       const response = await fetch(`/api/feedback/${id}`, {
@@ -27,8 +27,6 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
       }
     } catch (error: any) {
       console.log(error.message);
-    } finally {
-      console.log('User Deleted');
     }
   };
 

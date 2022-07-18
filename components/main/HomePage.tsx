@@ -1,4 +1,5 @@
 import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
+import { useModalContext } from '../../store/context/ModalContext';
 import AddButton from './AddButton';
 import CreateUserForm from './CreateUserForm';
 import EmployeeList from './EmployeeList';
@@ -7,9 +8,11 @@ import {
   HomepageWrapper,
   TitlesContainer,
 } from './HomePage.styles';
+import Modal from './Modal';
 
 const HomePage = () => {
   const { employees, isLoading } = useEmployeesDbContext();
+  const { isModalOpen, isFormActive } = useModalContext();
 
   if (isLoading) {
     return <p style={{ textAlign: 'center' }}>Loading...Please Wait.</p>;
@@ -25,7 +28,7 @@ const HomePage = () => {
 
   return (
     <HomepageWrapper>
-      <CreateUserForm />
+      {isFormActive && <CreateUserForm />}
       <TitlesContainer>
         <li>Name</li>
         <li>Email</li>
@@ -39,6 +42,7 @@ const HomePage = () => {
         })}
       </EmployeesData>
       <AddButton />
+      {isModalOpen && <Modal />}
     </HomepageWrapper>
   );
 };

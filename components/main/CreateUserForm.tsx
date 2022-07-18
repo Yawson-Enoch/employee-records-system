@@ -6,21 +6,23 @@ import {
   FormBtnContainer,
   FormContainer,
   FormContainerDetails,
-  FormField,
 } from './CreateUserForm.styles';
+import FormElements from './FormElements';
+
+interface IFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
   const { setEmployees } = useEmployeesDbContext();
-  const [users, setUsers] = useState({
+  const [users, setUsers] = useState<IFormValues>({
     firstName: '',
     lastName: '',
     email: '',
   });
-  const [focusRemove, setFocusRemove] = useState(false);
-
-  const focusAndLeaveHandler = () => {
-    setFocusRemove(true);
-  };
 
   const changeHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -47,17 +49,52 @@ const CreateUserForm = () => {
         console.log(
           'Something Went Wrong: Possible Server Error',
           response.status
+          // add a div to bottom of form and display 'api' error message - message: {'could not insert data'}
         );
       }
       const data: IApiDataProps = await response.json();
       const { data: dataFromApi } = data;
       setEmployees(dataFromApi);
+      // remove form modal
     } catch (error: any) {
+      // add a div to bottom of form and display 'fetch' error message - network error
       console.log(error.message);
     } finally {
       setUsers({ firstName: '', lastName: '', email: '' });
+      // remove finally
     }
   };
+
+  const inputs = [
+    {
+      id: 'firstname',
+      name: 'firstName',
+      type: 'text',
+      placeholder: 'Your First Name',
+      pattern: '^[A-Za-z0-9]{2,16}$',
+      labelText: 'First Name',
+      errorMessage: `Username should be 2-16 characters and shouldn't include any special
+      characters.`,
+    },
+    {
+      id: 'lastname',
+      name: 'lastName',
+      type: 'text',
+      placeholder: 'Your Last Name',
+      pattern: '^[A-Za-z0-9]{2,16}$',
+      labelText: 'Last Name',
+      errorMessage: `Username should be 2-16 characters and shouldn't include any special
+      characters.`,
+    },
+    {
+      id: 'email',
+      name: 'email',
+      type: 'email',
+      placeholder: 'name@email.com',
+      labelText: 'Email',
+      errorMessage: 'Email is invalid.',
+    },
+  ];
 
   return (
     <FormContainer>
@@ -65,7 +102,29 @@ const CreateUserForm = () => {
         <p>Add New Employee</p>
       </FormContainerDetails>
       <Form onSubmit={submitHandler}>
-        <FormField>
+        {inputs.map((input, index) => {
+          return (
+            <FormElements
+              key={index}
+              {...input}
+              onChange={changeHandler}
+              value={users[input.name as dynamicKey]}
+            />
+          );
+        })}
+        <FormBtnContainer>
+          <button type='submit'>Submit</button>
+        </FormBtnContainer>
+      </Form>
+    </FormContainer>
+  );
+};
+
+export default CreateUserForm;
+
+// type dynamicKey = keyof typeof users;
+{
+  /* <FormField>
           <input
             type='text'
             name='firstName'
@@ -114,13 +173,5 @@ const CreateUserForm = () => {
           />
           <label htmlFor='email'>Email</label>
           <div>Email is invalid.</div>
-        </FormField>
-        <FormBtnContainer>
-          <button type='submit'>Submit</button>
-        </FormBtnContainer>
-      </Form>
-    </FormContainer>
-  );
-};
-
-export default CreateUserForm;
+        </FormField> */
+}

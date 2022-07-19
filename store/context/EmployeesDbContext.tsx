@@ -40,7 +40,9 @@ const EmployeesDbContextProvider = ({
       } catch (error: any) {
         console.log('Network Error', error.message);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
       }
     };
     fetchData();

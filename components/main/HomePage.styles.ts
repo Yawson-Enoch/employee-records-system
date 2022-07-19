@@ -1,16 +1,29 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { bumpEffect, scaleDown } from '../../animations/animations';
+import {
+  animateAndStaggerChildren,
+  bumpEffect,
+  staggeredChild,
+} from '../../animations/animations';
 import { Wrapper } from '../../styles/utils';
 
 export const StyledMain = styled.main``;
 
-export const HomepageWrapper = styled.div`
+export const HomepageWrapper = styled(motion.div).attrs(() => {
+  return {
+    variants: animateAndStaggerChildren,
+    initial: 'initial',
+    animate: 'animate',
+  };
+})`
   ${Wrapper}
-  border: 1px solid yellow;
 `;
 
-export const TitlesContainer = styled.ul`
+export const TitlesContainer = styled(motion.ul).attrs(() => {
+  return {
+    variants: staggeredChild,
+  };
+})`
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
   grid-template-rows: 3rem;
@@ -25,9 +38,7 @@ export const TitlesContainer = styled.ul`
 
 export const EmployeesData = styled(motion.ul).attrs(() => {
   return {
-    variants: scaleDown,
-    initial: 'initial',
-    animate: 'animate',
+    variants: staggeredChild,
   };
 })`
   margin-top: var(--space-xtra-small);

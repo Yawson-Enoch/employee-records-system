@@ -9,19 +9,24 @@ import {
   StyledMain,
   TitlesContainer,
 } from './HomePage.styles';
+import Loader from './Loader';
 import Modal from './Modal';
 
 const HomePage = () => {
   const { employees, isLoading } = useEmployeesDbContext();
   const { isModalOpen, isFormActive } = useModalContext();
 
-  if (isLoading) {
-    return <p style={{ textAlign: 'center' }}>Loading...Please Wait.</p>;
+  if (isLoading || !employees) {
+    return (
+      <StyledMain>
+        <Loader />
+      </StyledMain>
+    );
   }
 
-  if (!employees) {
-    return <p style={{ textAlign: 'center' }}>No data yet.</p>;
-  }
+  // if (!employees) {
+  //   return <p style={{ textAlign: 'center' }}>No data yet.</p>;
+  // }
 
   if (employees.length === 0) {
     return <p style={{ textAlign: 'center' }}>Data Is Empty.</p>;
@@ -30,7 +35,6 @@ const HomePage = () => {
   return (
     <StyledMain>
       <HomepageWrapper>
-        {isFormActive && <CreateUserForm />}
         <TitlesContainer>
           <li>Name</li>
           <li>Email</li>
@@ -43,9 +47,10 @@ const HomePage = () => {
             return <EmployeeList key={employee.id} {...employee} />;
           })}
         </EmployeesData>
-        <AddButton />
-        {isModalOpen && <Modal />}
       </HomepageWrapper>
+      <AddButton />
+      {isFormActive && <CreateUserForm />}
+      {isModalOpen && <Modal />}
     </StyledMain>
   );
 };

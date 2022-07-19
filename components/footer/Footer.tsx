@@ -1,15 +1,15 @@
-import { FooterContent, FooterWrapper } from './Footer.styles';
+import { FooterContent, StyledFooter } from './Footer.styles';
 
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <FooterWrapper>
+    <StyledFooter>
       <FooterContent>
         <p>
           &copy; <span>{year} | GROUP 37</span>
         </p>
       </FooterContent>
-    </FooterWrapper>
+    </StyledFooter>
   );
 };
 

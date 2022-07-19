@@ -6,6 +6,7 @@ import EmployeeList from './EmployeeList';
 import {
   EmployeesData,
   HomepageWrapper,
+  StyledMain,
   TitlesContainer,
 } from './HomePage.styles';
 import Modal from './Modal';
@@ -27,23 +28,25 @@ const HomePage = () => {
   }
 
   return (
-    <HomepageWrapper>
-      {isFormActive && <CreateUserForm />}
-      <TitlesContainer>
-        <li>Name</li>
-        <li>Email</li>
-        <li>Date</li>
-        <li>Time</li>
-        <li>Actions</li>
-      </TitlesContainer>
-      <EmployeesData>
-        {employees.map((employee) => {
-          return <EmployeeList key={employee.id} {...employee} />;
-        })}
-      </EmployeesData>
-      <AddButton />
-      {isModalOpen && <Modal />}
-    </HomepageWrapper>
+    <StyledMain>
+      <HomepageWrapper>
+        {isFormActive && <CreateUserForm />}
+        <TitlesContainer>
+          <li>Name</li>
+          <li>Email</li>
+          <li>Date</li>
+          <li>Time</li>
+          <li>Actions</li>
+        </TitlesContainer>
+        <EmployeesData>
+          {employees.map((employee) => {
+            return <EmployeeList key={employee.id} {...employee} />;
+          })}
+        </EmployeesData>
+        <AddButton />
+        {isModalOpen && <Modal />}
+      </HomepageWrapper>
+    </StyledMain>
   );
 };
 

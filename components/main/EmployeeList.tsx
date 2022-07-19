@@ -1,11 +1,14 @@
-import { useRouter } from 'next/router';
+import { motion, useAnimation } from 'framer-motion';
 import { FaTrash } from 'react-icons/fa';
 import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
 import { IUserInfo } from '../../ts_ui';
-import { DeleteButton, GoToDetailsButton } from './HomePage.styles';
+import { DeleteButton } from './HomePage.styles';
 
 const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   const { employees, updateEmployees } = useEmployeesDbContext();
+  // framer-motion hook
+  const control = useAnimation();
+
   // const router = useRouter();
 
   // const goToDetails = (id: string) => {
@@ -14,7 +17,17 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
 
   const deleteHandler = async (id: string) => {
     const newData = employees.filter((employee) => employee.id !== id);
-    updateEmployees(newData);
+
+    setTimeout(() => {
+      updateEmployees(newData);
+    }, 1000);
+
+    control.start({
+      x: '-100vw',
+      transition: {
+        duration: 0.7,
+      },
+    });
 
     try {
       const response = await fetch(`/api/employees/${id}`, {
@@ -31,7 +44,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   };
 
   return (
-    <li key={id}>
+    <motion.li key={id} animate={control}>
       <p>{name}</p>
       <p>{email}</p>
       <p>{addedDate}</p>
@@ -44,7 +57,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
       <DeleteButton onClick={() => deleteHandler(id)}>
         <FaTrash />
       </DeleteButton>
-    </li>
+    </motion.li>
   );
 };
 

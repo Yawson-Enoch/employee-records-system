@@ -1,13 +1,19 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { bumpEffect, scaleDown } from '../../animations/animations';
 import { Wrapper } from '../../styles/utils';
+
+export const StyledMain = styled.main``;
 
 export const HomepageWrapper = styled.div`
   ${Wrapper}
+  border: 1px solid yellow;
 `;
 
 export const TitlesContainer = styled.ul`
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+  grid-template-rows: 3rem;
   align-items: center;
   justify-items: center;
   gap: var(--space-xtra-small);
@@ -17,8 +23,14 @@ export const TitlesContainer = styled.ul`
   background: var(--gradient-primary);
 `;
 
-export const EmployeesData = styled.ul`
-  margin-top: 1rem;
+export const EmployeesData = styled(motion.ul).attrs(() => {
+  return {
+    variants: scaleDown,
+    initial: 'initial',
+    animate: 'animate',
+  };
+})`
+  margin-top: var(--space-xtra-small);
   display: flex;
   flex-direction: column;
   gap: var(--space-xtra-small);
@@ -26,9 +38,10 @@ export const EmployeesData = styled.ul`
   li {
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+    grid-template-rows: 3rem;
     align-items: center;
     justify-items: center;
-    gap: var(--space-small);
+    gap: var(--space-xtra-small);
     border: 2px solid var(--grey-500);
     padding: 1rem 0;
     border-radius: var(--radius-medium);
@@ -42,13 +55,19 @@ export const EmployeesData = styled.ul`
 
 export const GoToDetailsButton = styled.button`
   background-color: transparent;
-  border: 1px solid var(--clr-accent-secondary);
+  border: 2px solid var(--clr-accent-secondary);
   border-radius: var(--radium-medium);
   padding: 0.3rem 0.5rem;
   height: 3.5rem;
   color: var(--clr-secondary);
 `;
-export const DeleteButton = styled.button`
+export const DeleteButton = styled(motion.button).attrs(() => {
+  return {
+    variants: bumpEffect,
+    whileHover: 'hover',
+    whileTap: 'tap',
+  };
+})`
   background-color: transparent;
   color: var(--clr-error);
   border: 2px solid var(--clr-error);

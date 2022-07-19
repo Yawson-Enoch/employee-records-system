@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Wrapper } from '../../styles/utils';
 
-export const HeaderWrapper = styled.header`
+export const StyledHeader = styled.header`
   display: grid;
   align-content: center;
   border-bottom: 2px solid var(--grey-500);

@@ -3,10 +3,12 @@ import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
 import { useModalContext } from '../../store/context/ModalContext';
 import { IApiDataProps } from '../../ts_ui';
 import {
+  CloseButton,
   Form,
   FormBtnContainer,
   FormContainer,
   FormContainerDetails,
+  SubmitButton,
 } from './CreateUserForm.styles';
 import FormElements from './FormElements';
 
@@ -113,10 +115,10 @@ const CreateUserForm = () => {
           );
         })}
         <FormBtnContainer>
-          <button type='button' onClick={closeFormAndModal}>
+          <CloseButton type='button' onClick={closeFormAndModal}>
             Close
-          </button>
-          <button type='submit'>Submit</button>
+          </CloseButton>
+          <SubmitButton type='submit'>Submit</SubmitButton>
         </FormBtnContainer>
       </Form>
     </FormContainer>

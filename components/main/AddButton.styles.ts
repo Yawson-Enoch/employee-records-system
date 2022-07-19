@@ -1,6 +1,14 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { bumpEffect } from '../../animations/animations';
 
-export const StyledAddButton = styled.button`
+export const StyledAddButton = styled(motion.button).attrs(() => {
+  return {
+    variants: bumpEffect,
+    whileHover: 'hover',
+    whileTap: 'tap',
+  };
+})`
   display: flex;
   align-items: center;
   justify-content: center;

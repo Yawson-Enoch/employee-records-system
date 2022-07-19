@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
   HeaderContent,
-  HeaderWrapper,
+  StyledHeader,
   Logo,
   ThemeTogglerAndNav,
 } from './Header.styles';
@@ -13,7 +13,7 @@ const ThemeToggler = dynamic(() => import('../theme-toggler/ThemeToggler'), {
 
 const Header = () => {
   return (
-    <HeaderWrapper>
+    <StyledHeader>
       <HeaderContent>
         <Link href='/'>
           <a>
@@ -24,7 +24,7 @@ const Header = () => {
           <ThemeToggler />
         </ThemeTogglerAndNav>
       </HeaderContent>
-    </HeaderWrapper>
+    </StyledHeader>
   );
 };
 

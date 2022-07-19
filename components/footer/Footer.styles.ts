@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Wrapper } from '../../styles/utils';
 
-export const FooterWrapper = styled.footer`
+export const StyledFooter = styled.footer`
   display: grid;
   align-content: center;
   border-top: 2px solid var(--grey-500);

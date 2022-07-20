@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { FormField } from './FormElements..styles';
+import { FormField } from './FormElements.styles';
 interface IFormElements {
   placeholder: string;
   type: string;

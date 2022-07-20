@@ -1,4 +1,4 @@
-import { StyledLoader } from './Loader..styles';
+import { StyledLoader } from './Loader.styles';
 
 const Loader = () => {
   return <StyledLoader role='loader'></StyledLoader>;

@@ -1,22 +1,12 @@
-import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
-import { useModalContext } from '../../store/context/ModalContext';
-import AddButton from './AddButton';
-import CreateUserForm from './CreateUserForm';
+import { useEmsContext } from '../../store/ems/EmsContext';
 import EmployeeList from './EmployeeList';
-import {
-  EmployeesData,
-  HomepageWrapper,
-  StyledMain,
-  TitlesContainer,
-} from './HomePage.styles';
+import { EmployeesData, HomepageWrapper, StyledMain, TitlesContainer } from './HomePage.styles';
 import Loader from './Loader';
-import Modal from './Modal';
 
 const HomePage = () => {
-  const { employees, isLoading } = useEmployeesDbContext();
-  const { isModalOpen, isFormActive } = useModalContext();
+  const { state } = useEmsContext();
 
-  if (isLoading || !employees) {
+  if (state.loading || !state.employees) {
     return (
       <StyledMain>
         <Loader />
@@ -24,11 +14,7 @@ const HomePage = () => {
     );
   }
 
-  // if (!employees) {
-  //   return <p style={{ textAlign: 'center' }}>No data yet.</p>;
-  // }
-
-  if (employees.length === 0) {
+  if (state.employees.length === 0) {
     return <p style={{ textAlign: 'center' }}>Data Is Empty.</p>;
   }
 
@@ -43,14 +29,11 @@ const HomePage = () => {
           <li>Actions</li>
         </TitlesContainer>
         <EmployeesData>
-          {employees.map((employee) => {
+          {state.employees.map(employee => {
             return <EmployeeList key={employee.id} {...employee} />;
           })}
         </EmployeesData>
       </HomepageWrapper>
-      <AddButton />
-      {isFormActive && <CreateUserForm />}
-      {isModalOpen && <Modal />}
     </StyledMain>
   );
 };

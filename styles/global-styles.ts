@@ -64,7 +64,7 @@ export const GlobalStyles = createGlobalStyle`
   --clr-white: #ffffff;
   --clr-error: #cc0000;
   --clr-success: #005a00;
-  --clr-backdrop: rgba(0, 0, 0, 0.5);
+  --clr-backdrop: rgba(0, 0, 0, 0.7);
   --clr-accent-primary:  #88528F;
   --clr-accent-secondary: #06969a;
   --gradient-primary: linear-gradient(
@@ -162,9 +162,6 @@ body {
   color: var(--clr-secondary);
   min-height: 100vh;
   overflow-x: hidden;
-  /* display: grid;
-  align-content: space-between;
-  grid-auto-rows: minmax(7rem, auto); */
 }
 
 p {

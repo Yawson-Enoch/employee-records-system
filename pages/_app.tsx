@@ -1,19 +1,16 @@
 import type { AppProps } from 'next/app';
 import Layout from '../layout/Layout';
-import { EmployeesDbContextProvider } from '../store/context/EmployeesDbContext';
-import { ModalContextProvider } from '../store/context/ModalContext';
+import { EmsContextProvider } from '../store/ems/EmsContext';
 import { AppThemeContextProvider } from '../styles/AppThemeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppThemeContextProvider>
-      <ModalContextProvider>
-        <EmployeesDbContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </EmployeesDbContextProvider>
-      </ModalContextProvider>
+      <EmsContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </EmsContextProvider>
     </AppThemeContextProvider>
   );
 }

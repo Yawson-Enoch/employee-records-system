@@ -1,5 +1,5 @@
-import { useModalContext } from '../../store/context/ModalContext';
-import { EConfirmDelete } from '../../ts_ui';
+import { useEmsContext } from '../../store/ems/EmsContext';
+import { EModalComponent, EModalToggleState } from '../../ts_ui';
 import {
   ButtonsContainer,
   ConfirmDeleteBox,
@@ -8,12 +8,8 @@ import {
   YesButton,
 } from './ConfirmDelete.styles';
 
-interface IDeleteHandler {
-  deleteHandler(id: string): void;
-}
-
-const ConfirmDelete = ({ deleteHandler }: IDeleteHandler) => {
-  const { confirmDeleteHandler } = useModalContext();
+const ConfirmDelete = () => {
+  const { modalHandler, userDeleteHandler } = useEmsContext();
 
   return (
     <ConfirmDeleteBox>
@@ -21,10 +17,13 @@ const ConfirmDelete = ({ deleteHandler }: IDeleteHandler) => {
         <FormContent>
           <p>Are you sure you want to delete?</p>
           <ButtonsContainer>
-            <NoButton type="button" onClick={() => deleteHandler}>
+            <NoButton
+              type="button"
+              onClick={() => modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox)}
+            >
               no
             </NoButton>
-            <YesButton type="button" onClick={() => confirmDeleteHandler(EConfirmDelete.yes)}>
+            <YesButton type="button" onClick={userDeleteHandler}>
               yes
             </YesButton>
           </ButtonsContainer>

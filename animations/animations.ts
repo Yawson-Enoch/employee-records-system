@@ -20,10 +20,10 @@ export const scaleUp = {
 
 export const bumpEffect = {
   hover: {
-    scale: 1.05,
+    scale: 1.2,
   },
   tap: {
-    scale: 0.9,
+    scale: 0.8,
   },
 };
 

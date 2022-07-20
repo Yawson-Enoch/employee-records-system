@@ -42,10 +42,12 @@ export const FormBtnContainer = styled.div`
 
 export const CloseButton = styled(GenericButton)`
   border: 2px solid var(--clr-error);
-  color: var(--clr-error);
+  background-color: var(--clr-error);
+  color: var(--clr-white);
 `;
 
 export const SubmitButton = styled(GenericButton)`
   border: 2px solid var(--blue-500);
-  color: var(--blue-500);
+  background-color: var(--blue-500);
+  color: var(--clr-white);
 `;

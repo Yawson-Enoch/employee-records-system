@@ -33,12 +33,12 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--space-small);
+  gap: var(--space-large);
 `;
 
 export const NoButton = styled(GenericButton)`
   background-color: var(--blue-500);
-  color: var(--blue-gray-100);
+  color: var(--clr-white);
   width: 8rem;
   border: 2px solid var(--blue-500);
   text-align: center;
@@ -46,7 +46,7 @@ export const NoButton = styled(GenericButton)`
 
 export const YesButton = styled(GenericButton)`
   background-color: var(--clr-error);
-  color: var(--gray-100);
+  color: var(--clr-white);
   width: 8rem;
   text-align: center;
   border: 2px solid var(--clr-error);

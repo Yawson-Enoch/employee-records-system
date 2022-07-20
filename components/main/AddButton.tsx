@@ -1,9 +1,16 @@
-import { useModalContext } from '../../store/context/ModalContext';
+import { useEmsContext } from '../../store/ems/EmsContext';
+import { EModalComponent, EModalToggleState } from '../../ts_ui';
 import { StyledAddButton } from './AddButton.styles';
 
 const AddButton = () => {
-  const { openFormAndModal } = useModalContext();
-  return <StyledAddButton onClick={openFormAndModal}>ADD</StyledAddButton>;
+  const { modalHandler } = useEmsContext();
+  return (
+    <StyledAddButton
+      onClick={() => modalHandler(EModalToggleState.show, EModalComponent.createUserForm)}
+    >
+      ADD
+    </StyledAddButton>
+  );
 };
 
 export default AddButton;

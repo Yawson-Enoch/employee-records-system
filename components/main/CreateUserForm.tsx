@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
-import { useModalContext } from '../../store/context/ModalContext';
-import { IApiDataProps } from '../../ts_ui';
+import { useEmsContext } from '../../store/ems/EmsContext';
+import { EModalComponent, EModalToggleState, IApiDataProps } from '../../ts_ui';
 import {
   CloseButton,
   Form,
@@ -20,17 +19,14 @@ interface IFormValues {
 type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
-  const { closeFormAndModal } = useModalContext();
-  const { updateEmployees } = useEmployeesDbContext();
+  const { modalHandler, updateEmployeesWithNewUserData } = useEmsContext();
   const [users, setUsers] = useState<IFormValues>({
     firstName: '',
     lastName: '',
     email: '',
   });
 
-  const changeHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void => {
+  const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     setUsers({
       ...users,
       [e.target.name]: e.target.value,
@@ -56,10 +52,9 @@ const CreateUserForm = () => {
           // add a div to bottom of form and display 'api' error message - message: {'could not insert data'}
         );
       }
-      const data: IApiDataProps = await response.json();
-      const { data: dataFromApi } = data;
-      updateEmployees(dataFromApi);
-      closeFormAndModal();
+      const { data }: IApiDataProps = await response.json();
+      updateEmployeesWithNewUserData(data);
+      modalHandler(EModalToggleState.hide, EModalComponent.createUserForm);
     } catch (error: any) {
       // add a div to bottom of form and display 'fetch' error message - network error
       console.log(error.message);
@@ -115,10 +110,13 @@ const CreateUserForm = () => {
           );
         })}
         <FormBtnContainer>
-          <CloseButton type='button' onClick={closeFormAndModal}>
+          <CloseButton
+            type="button"
+            onClick={() => modalHandler(EModalToggleState.hide, EModalComponent.createUserForm)}
+          >
             Close
           </CloseButton>
-          <SubmitButton type='submit'>Submit</SubmitButton>
+          <SubmitButton type="submit">Submit</SubmitButton>
         </FormBtnContainer>
       </Form>
     </FormContainer>

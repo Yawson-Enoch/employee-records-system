@@ -15,7 +15,12 @@ export interface IApiDataProps {
   data: IUserInfo[];
 }
 
-export const enum EConfirmDelete {
-  no = 'no',
-  yes = 'yes',
+export const enum EModalToggleState {
+  hide = 'Hide',
+  show = 'Show',
+}
+
+export const enum EModalComponent {
+  createUserForm = 'CreateUserForm',
+  confirmDeleteBox = 'ConfirmDeleteBox',
 }

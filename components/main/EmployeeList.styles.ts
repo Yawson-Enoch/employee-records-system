@@ -27,6 +27,6 @@ export const DeleteButton = styled(GenericButton)`
   align-items: center;
 
   svg {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 `;

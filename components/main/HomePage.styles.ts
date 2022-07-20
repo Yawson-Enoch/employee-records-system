@@ -1,10 +1,6 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import {
-  animateAndStaggerChildren,
-  bumpEffect,
-  staggeredChild,
-} from '../../animations/animations';
+import { animateAndStaggerChildren, staggeredChild } from '../../animations/animations';
 import { Wrapper } from '../../styles/utils';
 
 export const StyledMain = styled.main``;
@@ -45,23 +41,6 @@ export const EmployeesData = styled(motion.ul).attrs(() => {
   display: flex;
   flex-direction: column;
   gap: var(--space-xtra-small);
-
-  li {
-    display: grid;
-    grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
-    grid-template-rows: 3rem;
-    align-items: center;
-    justify-items: center;
-    gap: var(--space-xtra-small);
-    border: 2px solid var(--grey-500);
-    padding: 1rem 0;
-    border-radius: var(--radius-medium);
-    transition: border 0.3s linear;
-
-    &:hover {
-      border: 2px solid var(--clr-accent-secondary);
-    }
-  }
 `;
 
 export const GoToDetailsButton = styled.button`
@@ -71,21 +50,4 @@ export const GoToDetailsButton = styled.button`
   padding: 0.3rem 0.5rem;
   height: 3.5rem;
   color: var(--clr-secondary);
-`;
-export const DeleteButton = styled(motion.button).attrs(() => {
-  return {
-    variants: bumpEffect,
-    whileHover: 'hover',
-    whileTap: 'tap',
-  };
-})`
-  background-color: transparent;
-  color: var(--clr-error);
-  border: 2px solid var(--clr-error);
-  height: 3.5rem;
-  padding: 0.3rem 1.5rem;
-  border-radius: var(--radius-medium);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;

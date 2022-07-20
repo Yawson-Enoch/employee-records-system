@@ -1,8 +1,8 @@
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 import { FaTrash } from 'react-icons/fa';
 import { useEmployeesDbContext } from '../../store/context/EmployeesDbContext';
 import { IUserInfo } from '../../ts_ui';
-import { DeleteButton } from './HomePage.styles';
+import { DeleteButton, StyledEmployeeList } from './EmployeeList.styles';
 
 const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   const { employees, updateEmployees } = useEmployeesDbContext();
@@ -16,7 +16,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   // };
 
   const deleteHandler = async (id: string) => {
-    const newData = employees.filter((employee) => employee.id !== id);
+    const newData = employees.filter(employee => employee.id !== id);
 
     setTimeout(() => {
       updateEmployees(newData);
@@ -44,7 +44,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
   };
 
   return (
-    <motion.li key={id} animate={control}>
+    <StyledEmployeeList animate={control}>
       <p>{name}</p>
       <p>{email}</p>
       <p>{addedDate}</p>
@@ -57,7 +57,7 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
       <DeleteButton onClick={() => deleteHandler(id)}>
         <FaTrash />
       </DeleteButton>
-    </motion.li>
+    </StyledEmployeeList>
   );
 };
 

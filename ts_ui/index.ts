@@ -14,3 +14,8 @@ export interface IApiDataProps {
   message: string;
   data: IUserInfo[];
 }
+
+export const enum EConfirmDelete {
+  no = 'no',
+  yes = 'yes',
+}

@@ -1,16 +1,16 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { IApiDataProps, IUserInfo } from '../../ts_ui';
+
+interface IErrorState {
+  isError: boolean;
+  errorMessage: string;
+}
 
 interface IEmployeesDbContextProps {
   employees: IUserInfo[];
   updateEmployees(data: IUserInfo[]): void;
   isLoading: boolean;
+  errorState: IErrorState;
 }
 
 interface IEmployeesDbContextProviderProps {
@@ -19,26 +19,29 @@ interface IEmployeesDbContextProviderProps {
 
 const EmployeesDbContext = createContext({} as IEmployeesDbContextProps);
 
-const EmployeesDbContextProvider = ({
-  children,
-}: IEmployeesDbContextProviderProps) => {
+const EmployeesDbContextProvider = ({ children }: IEmployeesDbContextProviderProps) => {
   const [employees, setEmployees] = useState<IUserInfo[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [errorState, setErrorState] = useState<IErrorState>({
+    isError: false,
+    errorMessage: '',
+  });
 
-  /* CSR */
+  /* CSR - fetch data stored in local employees.json file*/
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         const response = await fetch('/api/employees');
-        if (!response.ok) {
-          console.log('Something Went Wrong: Possible Server Error');
-        }
-        const data: IApiDataProps = await response.json();
-        const { data: dataFromApi } = data;
-        setEmployees(dataFromApi);
+        const { data, message }: IApiDataProps = await response.json();
+        // if (!response.ok) {
+        //   setErrorState({ isError: true, errorMessage: message });
+        // } else {
+        //   setEmployees(data);
+        // }
+        response.ok ? setEmployees(data) : setErrorState({ isError: true, errorMessage: message });
       } catch (error: any) {
-        console.log('Network Error', error.message);
+        setErrorState({ isError: true, errorMessage: error.message });
       } finally {
         setTimeout(() => {
           setIsLoading(false);
@@ -58,6 +61,7 @@ const EmployeesDbContextProvider = ({
         employees,
         updateEmployees,
         isLoading,
+        errorState,
       }}
     >
       {children}

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { bumpEffect, scaleUp } from '../../animations/animations';
+import { scaleUp } from '../../animations/animations';
 import { FlowContent } from '../../styles/utils';
+import { GenericButton } from './GenericButton.styles';
 
 export const FormContainer = styled(motion.section).attrs(() => {
   return {
@@ -37,32 +38,14 @@ export const FormBtnContainer = styled.div`
   display: flex;
   justify-content: end;
   gap: var(--space-small);
-
-  button {
-    outline: none;
-    background-color: transparent;
-    border-radius: var(--radius-medium);
-    padding: 0.5rem 1rem;
-  }
 `;
 
-export const CloseButton = styled(motion.button).attrs(() => {
-  return {
-    variants: bumpEffect,
-    whileHover: 'hover',
-    whileTap: 'tap',
-  };
-})`
+export const CloseButton = styled(GenericButton)`
   border: 2px solid var(--clr-error);
   color: var(--clr-error);
 `;
-export const SubmitButton = styled(motion.button).attrs(() => {
-  return {
-    variants: bumpEffect,
-    whileHover: 'hover',
-    whileTap: 'tap',
-  };
-})`
+
+export const SubmitButton = styled(GenericButton)`
   border: 2px solid var(--blue-500);
   color: var(--blue-500);
 `;

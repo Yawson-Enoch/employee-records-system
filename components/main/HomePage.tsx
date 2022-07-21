@@ -29,9 +29,9 @@ const HomePage = () => {
           <li>Actions</li>
         </TitlesContainer>
         <EmployeesData>
-          {state.employees.map(employee => {
-            return <EmployeeList key={employee.id} {...employee} />;
-          })}
+          {state.employees.map(employee => (
+            <EmployeeList key={employee.id} {...employee} />
+          ))}
         </EmployeesData>
       </HomepageWrapper>
     </StyledMain>

@@ -12,15 +12,15 @@ const Home = () => {
   return (
     <AnimatePresence>
       <Head>
-        <meta name="description" content="home page" />
-        <meta name="keywords" content="home page" />
+        <meta name='description' content='home page' />
+        <meta name='keywords' content='home page' />
         <title>Home</title>
       </Head>
       <HomePage />
       <AddButton />
-      {state.createUserFormActive && <CreateUserForm key="form" />}
-      {state.confirmDeleteBoxActive && <ConfirmDelete key="delete" />}
-      {state.modalActive && <Modal />}
+      {state.createUserFormActive && <CreateUserForm key='form' />}
+      {state.confirmDeleteBoxActive && <ConfirmDelete key='delete' />}
+      {state.modalActive && <Modal key='modal' />}
     </AnimatePresence>
   );
 };

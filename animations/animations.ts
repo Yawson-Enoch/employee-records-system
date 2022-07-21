@@ -90,3 +90,19 @@ export const addButtonAnimation = {
     scale: 0.9,
   },
 };
+
+export const SlideLeft = {
+  show: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+  },
+  hide: {
+    x: '-100vw',
+    opacity: 0,
+    scale: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};

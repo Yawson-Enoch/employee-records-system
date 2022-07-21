@@ -22,7 +22,7 @@ export const ConfirmDeleteBox = styled(motion.section).attrs(() => {
   border-radius: var(--radius-medium);
   z-index: 20;
   background-color: var(--clr-primary);
-  border: 2px solid var(--grey-500);
+  border: var(--border-primary);
 `;
 
 export const FormContent = styled.div`

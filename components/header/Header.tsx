@@ -1,13 +1,8 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import {
-  HeaderContent,
-  StyledHeader,
-  Logo,
-  ThemeTogglerAndNav,
-} from './Header.styles';
+import { HeaderContent, StyledHeader, Logo, ThemeTogglerAndNav } from './Header.styles';
 
-const ThemeToggler = dynamic(() => import('../theme-toggler/ThemeToggler'), {
+const ThemeToggler = dynamic(() => import('./ThemeToggler'), {
   ssr: false,
 });
 

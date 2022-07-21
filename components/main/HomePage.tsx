@@ -1,6 +1,6 @@
 import { useEmsContext } from '../../store/ems/EmsContext';
-import EmployeeList from './EmployeeList';
-import { EmployeesData, HomepageWrapper, StyledMain, TitlesContainer } from './HomePage.styles';
+import EmployeeData from './EmployeeData';
+import { HomepageWrapper, StyledMain, TitlesContainer } from './HomePage.styles';
 import Loader from './Loader';
 
 const HomePage = () => {
@@ -28,11 +28,7 @@ const HomePage = () => {
           <li>Time</li>
           <li>Actions</li>
         </TitlesContainer>
-        <EmployeesData>
-          {state.employees.map(employee => (
-            <EmployeeList key={employee.id} {...employee} />
-          ))}
-        </EmployeesData>
+        <EmployeeData />
       </HomepageWrapper>
     </StyledMain>
   );

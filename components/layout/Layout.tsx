@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Footer from '../components/footer/Footer';
-import Header from '../components/header/Header';
+import Footer from '../footer/Footer';
+import Header from '../header/Header';
 import { LayoutWrapper } from './Layout.styles';
 
 const Layout: FC = ({ children }) => {

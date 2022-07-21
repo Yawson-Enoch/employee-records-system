@@ -14,7 +14,7 @@ export const FormField = styled.div<{ focused: boolean }>`
     width: 100%;
     background-color: transparent;
     color: var(--clr-secondary);
-    border-color: var(--clr-secondary);
+    border-color: var(--grey-500);
     box-shadow: none;
     border-radius: 0;
     border-width: 1px;

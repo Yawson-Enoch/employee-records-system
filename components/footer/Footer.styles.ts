@@ -4,7 +4,7 @@ import { Wrapper } from '../../styles/utils';
 export const StyledFooter = styled.footer`
   display: grid;
   align-content: center;
-  border-top: 2px solid var(--grey-500);
+  border-top: var(--border-primary);
 `;
 
 export const FooterContent = styled.div`

@@ -22,7 +22,7 @@ export const FormContainer = styled(motion.section).attrs(() => {
   border-radius: var(--radius-medium);
   z-index: 20;
   background-color: var(--clr-primary);
-  border: 2px solid var(--grey-500);
+  border: var(--border-primary);
 `;
 
 export const FormContainerDetails = styled.div`
@@ -42,13 +42,11 @@ export const FormBtnContainer = styled.div`
 `;
 
 export const CloseButton = styled(GenericButton)`
-  border: 2px solid var(--clr-error);
   background-color: var(--clr-error);
   color: var(--clr-white);
 `;
 
 export const SubmitButton = styled(GenericButton)`
-  border: 2px solid var(--blue-500);
   background-color: var(--blue-500);
   color: var(--clr-white);
 `;

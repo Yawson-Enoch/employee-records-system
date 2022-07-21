@@ -1,3 +1,12 @@
+export const bumpEffect = {
+  hover: {
+    scale: 1.1,
+  },
+  tap: {
+    scale: 0.9,
+  },
+};
+
 export const scaleUp = {
   hide: {
     translateX: 0,
@@ -18,15 +27,6 @@ export const scaleUp = {
   },
 };
 
-export const bumpEffect = {
-  hover: {
-    scale: 1.1,
-  },
-  tap: {
-    scale: 0.9,
-  },
-};
-
 export const scaleDown = {
   initial: {
     y: -15,
@@ -44,33 +44,23 @@ export const scaleDown = {
   },
 };
 
-export const animateAndStaggerChildren = {
-  initial: {
-    scale: 0.5,
-    opacity: 0,
-  },
-  animate: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 150,
-      when: 'beforeChildren',
-      staggerChildren: 0.5,
-    },
-  },
-};
-
-export const staggeredChild = {
+export const slideRight = {
   initial: {
     y: -15,
-    x: -10,
+    x: -15,
     opacity: 0,
+    scale: 0.9,
   },
   animate: {
     y: 0,
     x: 0,
     opacity: 1,
+    scale: 1,
+  },
+  transition: {
+    type: 'spring',
+    stiffness: 70,
+    damping: 10,
   },
 };
 
@@ -88,21 +78,5 @@ export const addButtonAnimation = {
   },
   tap: {
     scale: 0.9,
-  },
-};
-
-export const SlideLeft = {
-  show: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-  },
-  hide: {
-    x: '-100vw',
-    opacity: 0,
-    scale: 0,
-    transition: {
-      duration: 0.5,
-    },
   },
 };

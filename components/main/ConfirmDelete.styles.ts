@@ -9,6 +9,7 @@ export const ConfirmDeleteBox = styled(motion.section).attrs(() => {
     variants: scaleUp,
     initial: 'hide',
     animate: 'show',
+    exit: 'hide',
   };
 })`
   width: fit-content;

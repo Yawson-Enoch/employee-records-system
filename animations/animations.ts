@@ -1,7 +1,7 @@
 export const scaleUp = {
   hide: {
-    translateX: '-30%',
-    translateY: '-30%',
+    translateX: 0,
+    translateY: 0,
     scale: 0.5,
     opacity: 0,
   },
@@ -20,10 +20,10 @@ export const scaleUp = {
 
 export const bumpEffect = {
   hover: {
-    scale: 1.2,
+    scale: 1.1,
   },
   tap: {
-    scale: 0.8,
+    scale: 0.9,
   },
 };
 
@@ -84,7 +84,7 @@ export const addButtonAnimation = {
     scale: 1,
   },
   hover: {
-    scale: 1.05,
+    scale: 1.1,
   },
   tap: {
     scale: 0.9,

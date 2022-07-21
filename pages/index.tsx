@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
 import AddButton from '../components/main/AddButton';
 import ConfirmDelete from '../components/main/ConfirmDelete';
@@ -9,7 +10,7 @@ import { useEmsContext } from '../store/ems/EmsContext';
 const Home = () => {
   const { state } = useEmsContext();
   return (
-    <>
+    <AnimatePresence>
       <Head>
         <meta name="description" content="home page" />
         <meta name="keywords" content="home page" />
@@ -17,10 +18,10 @@ const Home = () => {
       </Head>
       <HomePage />
       <AddButton />
-      {state.createUserFormActive && <CreateUserForm />}
-      {state.confirmDeleteBoxActive && <ConfirmDelete />}
+      {state.createUserFormActive && <CreateUserForm key="form" />}
+      {state.confirmDeleteBoxActive && <ConfirmDelete key="delete" />}
       {state.modalActive && <Modal />}
-    </>
+    </AnimatePresence>
   );
 };
 

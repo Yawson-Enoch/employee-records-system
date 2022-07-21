@@ -83,10 +83,16 @@ const EmsContextProvider = ({ children }: IEmsContextProviderProps) => {
   const getUniqueUserIdForDeletion = async (id: string) => {
     modalHandler(EModalToggleState.show, EModalComponent.confirmDeleteBox);
     dispatch({ type: EActions.UniqueUserId, payload: id });
+  };
 
+  const userDeleteHandler = () => {
+    modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox);
+    setTimeout(() => {
+      dispatch({ type: EActions.DeleteEmployee });
+    }, 500);
     const deleteUserFromDb = async () => {
       try {
-        const response = await fetch(`/api/employees/${id}`, {
+        const response = await fetch(`/api/employees/${state?.uniqueUserId}`, {
           method: 'DELETE',
         });
 
@@ -99,13 +105,6 @@ const EmsContextProvider = ({ children }: IEmsContextProviderProps) => {
       }
     };
     deleteUserFromDb();
-  };
-
-  const userDeleteHandler = () => {
-    modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox);
-    setTimeout(() => {
-      dispatch({ type: EActions.DeleteEmployee });
-    }, 200);
   };
 
   // export current state values

@@ -9,6 +9,7 @@ export const FormContainer = styled(motion.section).attrs(() => {
     variants: scaleUp,
     initial: 'hide',
     animate: 'show',
+    exit: 'hide',
   };
 })`
   width: 50%;

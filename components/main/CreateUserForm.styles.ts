@@ -31,6 +31,7 @@ export const FormContainerDetails = styled.div`
     font-size: var(--fs-large);
   }
 `;
+
 export const Form = styled.form`
   ${FlowContent}
 `;

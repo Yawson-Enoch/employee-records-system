@@ -6,6 +6,7 @@ export const StyledHeader = styled.header`
   align-content: center;
   border-bottom: var(--border-primary);
 `;
+
 export const HeaderContent = styled.div`
   ${Wrapper}
   display: flex;

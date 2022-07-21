@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { FormField } from './FormElements.styles';
 interface IFormElements {
   placeholder: string;
@@ -14,14 +14,8 @@ interface IFormElements {
 }
 
 const FormElements = (props: IFormElements) => {
-  const [focusRemove, setFocusRemove] = useState(false);
-
-  const focusAndLeaveHandler = () => {
-    setFocusRemove(true);
-  };
-
   return (
-    <FormField focused={focusRemove}>
+    <FormField>
       <input
         type={props.type}
         name={props.name}
@@ -29,9 +23,8 @@ const FormElements = (props: IFormElements) => {
         id={props.id}
         required
         placeholder={props.placeholder}
-        pattern={props?.pattern}
+        pattern={props.pattern}
         onChange={props.onChange}
-        onBlur={focusAndLeaveHandler}
         autoFocus={props.autofocus}
       />
       <label htmlFor={props.id}>{props.labelText}</label>

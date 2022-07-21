@@ -52,7 +52,7 @@ const EmsContextProvider = ({ children }: IEmsContextProviderProps) => {
           // delay data loading - not ideal, but my lecturers love loaders: haha
           setTimeout(() => {
             dispatch({ type: EActions.FetchEmployees, payload: data });
-          }, 1000);
+          }, 500);
         }
         // response.ok ? setEmployees(data) : setErrorState({ isError: true, errorMessage: message });
       } catch (error: any) {

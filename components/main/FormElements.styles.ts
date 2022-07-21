@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormField = styled.div<{ focused: boolean }>`
+export const FormField = styled.div`
   label {
     display: block;
     color: var(--clr-secondary);
@@ -51,11 +51,11 @@ export const FormField = styled.div<{ focused: boolean }>`
     font-size: 1.5rem;
   }
 
-  input:invalid {
-    border-color: ${({ focused }) => focused && 'var(--clr-error)'};
+  input:invalid:not(:placeholder-shown) {
+    border-color: var(--clr-error);
     ~ div {
-      pointer-events: ${({ focused }) => focused && 'all'};
-      opacity: ${({ focused }) => focused && 1};
+      pointer-events: all;
+      opacity: 1;
     }
   }
 `;

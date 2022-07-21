@@ -29,6 +29,7 @@ export const FormContent = styled.div`
   ${FlowContent}
   margin-inline: auto;
 `;
+
 export const ButtonsContainer = styled.div`
   margin-inline: auto;
   display: flex;

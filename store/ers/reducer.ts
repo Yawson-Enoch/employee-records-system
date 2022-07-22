@@ -42,11 +42,6 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
       return { ...state, uniqueUserId: action.payload };
     }
 
-    case EActions.DeleteEmployee: {
-      const newData = state.employees.filter(employee => employee.id !== state.uniqueUserId);
-      return { ...state, employees: newData };
-    }
-
     case EActions.Editing: {
       return { ...state, editing: true };
     }

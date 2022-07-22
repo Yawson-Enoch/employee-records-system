@@ -103,7 +103,7 @@ const CreateUserForm = () => {
   return (
     <FormContainer>
       <FormContainerDetails>
-        <p>Add New Employee</p>
+        <p>{state.editing ? 'Edit' : 'Add New'} Employee</p>
       </FormContainerDetails>
       <Form onSubmit={submitHandler}>
         {inputs.map((input, index) => {

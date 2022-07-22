@@ -67,11 +67,11 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
         writeFileSync(filePath, JSON.stringify(updatedList));
 
         return res.status(201).json({
-          message: 'info successfully edited',
+          message: 'user info successfully edited',
           data: updatedList,
         });
       } catch (error) {
-        return res.status(500).json({ message: 'error editing user info user' });
+        return res.status(500).json({ message: 'error editing user info' });
       }
     }
 

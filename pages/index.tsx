@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
 import AddButton from '../components/main/AddButton';
-import ConfirmDelete from '../components/main/ConfirmDelete';
+import ConfirmDelete from '../components/main/ConfirmDeleteBox';
 import CreateUserForm from '../components/main/CreateUserForm';
 import HomePage from '../components/main/HomePage';
 import Modal from '../components/main/Modal';
@@ -14,7 +14,7 @@ const Home = () => {
       <Head>
         <meta name='description' content='home page' />
         <meta name='keywords' content='home page' />
-        <title>Home</title>
+        <title>Ers</title>
       </Head>
       <HomePage />
       <AddButton />

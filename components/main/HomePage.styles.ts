@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { Wrapper } from '../../styles/utils';
 
-export const StyledMain = styled.main``;
-
 export const HomepageWrapper = styled(motion.div)`
   ${Wrapper}
 `;

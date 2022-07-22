@@ -20,7 +20,7 @@ export const scaleUp = {
     scale: 1,
     opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: 0.1,
     },
   },
 };
@@ -36,8 +36,7 @@ export const scaleDown = {
     opacity: 1,
     scale: 1,
     transition: {
-      delay: 0.2,
-      duration: 0.5,
+      duration: 0.1,
     },
   },
 };

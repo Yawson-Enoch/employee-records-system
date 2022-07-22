@@ -1,6 +1,6 @@
 import { useErsContext } from '../../store/ers/ErsContext';
 import EmployeeData from './EmployeeData';
-import { HomepageWrapper, StyledMain, TitlesContainer } from './HomePage.styles';
+import { HomepageWrapper, TitlesContainer } from './HomePage.styles';
 import Loader from './Loader';
 
 const HomePage = () => {
@@ -8,9 +8,9 @@ const HomePage = () => {
 
   if (state.loading || !state.employees) {
     return (
-      <StyledMain>
+      <main>
         <Loader />
-      </StyledMain>
+      </main>
     );
   }
 
@@ -19,7 +19,7 @@ const HomePage = () => {
   }
 
   return (
-    <StyledMain>
+    <main>
       <HomepageWrapper>
         <TitlesContainer>
           <li>Name</li>
@@ -30,7 +30,7 @@ const HomePage = () => {
         </TitlesContainer>
         <EmployeeData />
       </HomepageWrapper>
-    </StyledMain>
+    </main>
   );
 };
 

@@ -53,7 +53,10 @@ export default class MyDocument extends Document {
         <Head>
           <meta name='author' content='Yawson Enoch' />
           <meta name='keywords' content='ers, employee records system' />
-          <meta name='description' content='Employee records system with CRUD operations.' />
+          <meta
+            name='description'
+            content='Employee records system with real-time CRUD operations.'
+          />
           <link rel='icon' href='/favicon.ico' />
         </Head>
         <body>

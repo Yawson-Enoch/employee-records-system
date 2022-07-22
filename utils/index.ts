@@ -14,7 +14,7 @@ export const checkEmailValidity = (email: string) => {
   return regex.test(email);
 };
 
-export const checkNameValidity = (name: string) => {
+export const checkNameValidity = (name: string): boolean => {
   const regex = /^[A-Za-z0-9]{2,16}$/;
   return regex.test(name);
 };
@@ -23,7 +23,7 @@ export const removeRedundantSpacesInAString = (words: string): string => {
   return words.trim().replaceAll(/\W{2,}/g, ' ');
 };
 
-export const capitalizeFirstLetter = (word: string) => {
+export const capitalizeFirstLetter = (word: string): string => {
   return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 };
 

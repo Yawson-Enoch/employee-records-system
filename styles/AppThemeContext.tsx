@@ -6,7 +6,7 @@ interface IAppThemeContext {
   themeHandler(): void;
 }
 
-interface IProps {
+interface IAppThemeContextProviderProps {
   children: ReactNode;
 }
 
@@ -19,11 +19,11 @@ const setUserPreferredTheme = (): string => {
   return 'dark';
 };
 
-export const AppThemeContextProvider = ({ children }: IProps) => {
+export const AppThemeContextProvider = ({ children }: IAppThemeContextProviderProps) => {
   const [theme, setTheme] = useState<string>(() => setUserPreferredTheme());
 
   const themeHandler = (): void => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   useEffect(() => {

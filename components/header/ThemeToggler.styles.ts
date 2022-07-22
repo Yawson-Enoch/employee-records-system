@@ -10,10 +10,7 @@ export const StyledThemeToggler = styled.div`
     justify-content: center;
     align-items: center;
     background: transparent;
+    color: var(--clr-secondary);
     border: transparent;
-
-    svg {
-      color: var(--clr-secondary);
-    }
   }
 `;

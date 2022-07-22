@@ -29,6 +29,7 @@ export const FormContainerDetails = styled.div`
   margin-bottom: var(--space-large);
   p {
     font-size: var(--fs-large);
+    text-align: center;
   }
 `;
 

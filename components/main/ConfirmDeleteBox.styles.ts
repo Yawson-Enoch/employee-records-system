@@ -4,7 +4,7 @@ import { scaleUp } from '../../animations/animations';
 import { FlowContent } from '../../styles/utils';
 import { GenericButton } from './GenericButton.styles';
 
-export const ConfirmDeleteBox = styled(motion.section).attrs(() => {
+export const StyledConfirmDeleteBox = styled(motion.section).attrs(() => {
   return {
     variants: scaleUp,
     initial: 'hide',
@@ -36,20 +36,19 @@ export const ButtonsContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: var(--space-large);
+
+  button {
+    width: 8rem;
+    text-align: center;
+  }
 `;
 
 export const NoButton = styled(GenericButton)`
   background-color: var(--blue-500);
   color: var(--clr-white);
-  width: 8rem;
-  border: 2px solid var(--blue-500);
-  text-align: center;
 `;
 
 export const YesButton = styled(GenericButton)`
   background-color: var(--clr-error);
   color: var(--clr-white);
-  width: 8rem;
-  text-align: center;
-  border: 2px solid var(--clr-error);
 `;

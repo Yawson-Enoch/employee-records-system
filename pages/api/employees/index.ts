@@ -31,7 +31,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
         });
       } catch (error) {
         return res.status(500).json({
-          message: 'error getting data from DB',
+          message: 'error fetching data from DB',
         });
       }
     }

@@ -26,7 +26,6 @@ interface IErsContextProps {
   updateEmployeesWithNewUserData(data: IUserInfo[]): void;
   modalHandler(toggleState: EModalToggleState, component: EModalComponent): void;
   getUniqueUserIdForDeletion(id: string): void;
-  userDeleteHandler(): void;
   userEditHandler(argv: IEditInfo): void;
 }
 
@@ -60,10 +59,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
         if (!response.ok) {
           console.log('log error from db: message');
         } else {
-          // delay data loading - not ideal, but my lecturers love loaders: haha
-          setTimeout(() => {
-            dispatch({ type: EActions.FetchEmployees, payload: data });
-          }, 500);
+          dispatch({ type: EActions.FetchEmployees, payload: data });
         }
         // response.ok ? setEmployees(data) : setErrorState({ isError: true, errorMessage: message });
       } catch (error: any) {
@@ -76,7 +72,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   }, []);
 
   // event handlers
-  // update with newly added user after 'POST' operation
+  // update with newly added user after 'POST' | 'PATCH' | 'DELETE' operation
   const updateEmployeesWithNewUserData = (data: IUserInfo[]) => {
     dispatch({ type: EActions.UpdateEmployees, payload: data });
   };
@@ -96,28 +92,6 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     dispatch({ type: EActions.UniqueUserId, payload: id });
   };
 
-  const userDeleteHandler = () => {
-    modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox);
-    setTimeout(() => {
-      dispatch({ type: EActions.DeleteEmployee });
-    }, 500);
-    const deleteUserFromDb = async () => {
-      try {
-        const response = await fetch(`/api/employees/${state?.uniqueUserId}`, {
-          method: 'DELETE',
-        });
-
-        if (!response.ok) {
-          // 'Something Went Wrong: Log server error message: {message: ........provided by server from response.json()}',
-          console.log(response.status);
-        }
-      } catch (error: any) {
-        console.log(error.message);
-      }
-    };
-    deleteUserFromDb();
-  };
-
   const userEditHandler = (argv: IEditInfo) => {
     modalHandler(EModalToggleState.show, EModalComponent.createUserForm);
     dispatch({ type: EActions.Editing });
@@ -131,7 +105,6 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     updateEmployeesWithNewUserData,
     modalHandler,
     getUniqueUserIdForDeletion,
-    userDeleteHandler,
     userEditHandler,
   };
 

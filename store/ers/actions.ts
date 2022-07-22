@@ -1,9 +1,8 @@
-import { EModalComponent, EModalToggleState, IUserInfo } from '../../ts_ui';
+import { EModalComponent, EModalToggleState, IEditInfo, IUserInfo } from '../../ts_ui';
 
 export const enum EActions {
   FetchEmployees = 'FETCH_EMPLOYEES',
   UpdateEmployees = 'UPDATE_EMPLOYEES',
-  DeleteEmployee = 'DELETE_EMPLOYEE',
   Loading = 'LOADING',
   ModalActive = 'MODAL_ACTIVE',
   UniqueUserId = 'UNIQUE_USER_ID',
@@ -19,9 +18,6 @@ export type Actions =
   | {
       type: EActions.UpdateEmployees;
       payload: IUserInfo[];
-    }
-  | {
-      type: EActions.DeleteEmployee;
     }
   | {
       type: EActions.Loading;
@@ -42,10 +38,5 @@ export type Actions =
     }
   | {
       type: EActions.EditInfo;
-      payload: {
-        id: string;
-        firstName: string;
-        lastName: string;
-        email: string;
-      };
+      payload: IEditInfo;
     };

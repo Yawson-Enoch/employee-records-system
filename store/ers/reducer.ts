@@ -5,7 +5,10 @@ import { IErsAppState } from './ErsContext';
 export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState => {
   switch (action.type) {
     case EActions.Loading: {
-      return { ...state, loading: true };
+      if (action.payload === 'show') {
+        return { ...state, loading: true };
+      }
+      return { ...state, loading: false };
     }
 
     case EActions.FetchEmployees: {
@@ -30,7 +33,6 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
         modalActive: false,
         confirmDeleteBoxActive: false,
         createUserFormActive: false,
-        editing: false,
       };
     }
 
@@ -43,11 +45,25 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
     }
 
     case EActions.Editing: {
-      return { ...state, editing: true };
+      if (action.payload === 'yes') {
+        return { ...state, editing: true };
+      }
+      return { ...state, editing: false };
     }
 
     case EActions.EditInfo: {
       return { ...state, editInfo: action.payload };
+    }
+
+    case EActions.Error: {
+      if (action.payload === 'show') {
+        return { ...state, error: true };
+      }
+      return { ...state, error: false };
+    }
+
+    case EActions.ErrorMessage: {
+      return { ...state, errorMessage: action.payload };
     }
 
     default: {

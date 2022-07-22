@@ -14,7 +14,7 @@ import FormElements from './FormElements';
 type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
-  const { modalHandler, updateEmployeesWithNewUserData, state } = useErsContext();
+  const { modalHandler, updateEmployeesWithNewUserData, state, errorHandler } = useErsContext();
 
   let initialValues: IFormValues = { firstName: '', lastName: '', email: '' };
   let method: string = 'POST';
@@ -50,21 +50,16 @@ const CreateUserForm = () => {
           ...users,
         }),
       });
+      const { data, message }: IApiDataProps = await response.json();
 
       if (!response.ok) {
-        console.log(
-          'Something Went Wrong: Possible Server Error',
-          response.status
-          // add a div to bottom of form and display 'api' error message - message: {'could not insert data'}
-        );
+        errorHandler(message);
       }
 
-      const { data }: IApiDataProps = await response.json();
       updateEmployeesWithNewUserData(data);
       modalHandler(EModalToggleState.hide, EModalComponent.createUserForm);
     } catch (error: any) {
-      // add a div to bottom of form and display 'fetch' error message - network error
-      console.log(error.message);
+      errorHandler(error.message);
     }
   };
 

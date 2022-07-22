@@ -26,12 +26,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
       try {
         const data: IUserInfo[] = extractEmployeesDB(filePath);
         return res.status(200).json({
-          message: 'success',
+          message: 'success.',
           data,
         });
       } catch (error) {
         return res.status(500).json({
-          message: 'error fetching data from DB',
+          message: 'error fetching data from DB.',
         });
       }
     }
@@ -44,7 +44,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
         !checkNameValidity(lastName) ||
         !checkEmailValidity(email)
       ) {
-        return res.status(400).json({ message: 'invalid user data' });
+        return res.status(400).json({ message: 'invalid user data.' });
       }
 
       const newUserInfo = {
@@ -63,18 +63,18 @@ const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
         writeFileSync(filePath, JSON.stringify(data));
 
         return res.status(201).json({
-          message: 'info successfully added',
+          message: 'info successfully added.',
           data,
         });
       } catch (error) {
         return res.status(500).json({
-          message: 'info could not be added',
+          message: 'info could not be added.',
         });
       }
     }
 
     default: {
-      return res.status(404).json({ message: 'request not handled' });
+      return res.status(404).json({ message: 'request not handled.' });
     }
   }
 };

@@ -8,6 +8,8 @@ export const enum EActions {
   UniqueUserId = 'UNIQUE_USER_ID',
   Editing = 'EDITING',
   EditInfo = 'EDIT_INFO',
+  Error = 'ERROR',
+  ErrorMessage = 'ERROR_MESSAGE',
 }
 
 export type Actions =
@@ -21,6 +23,7 @@ export type Actions =
     }
   | {
       type: EActions.Loading;
+      payload: 'show' | 'hide';
     }
   | {
       type: EActions.ModalActive;
@@ -35,8 +38,17 @@ export type Actions =
     }
   | {
       type: EActions.Editing;
+      payload: 'yes' | 'no';
     }
   | {
       type: EActions.EditInfo;
       payload: IEditInfo;
+    }
+  | {
+      type: EActions.Error;
+      payload: 'show' | 'hide';
+    }
+  | {
+      type: EActions.ErrorMessage;
+      payload: string;
     };

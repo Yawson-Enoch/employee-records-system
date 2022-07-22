@@ -18,6 +18,8 @@ export interface IErsAppState {
   uniqueUserId: string;
   editing: boolean;
   editInfo: IEditInfo;
+  error: boolean;
+  errorMessage: string;
 }
 
 interface IErsContextProps {
@@ -27,6 +29,7 @@ interface IErsContextProps {
   modalHandler(toggleState: EModalToggleState, component: EModalComponent): void;
   getUniqueUserIdForDeletion(id: string): void;
   userEditHandler(argv: IEditInfo): void;
+  errorHandler(text: string): void;
 }
 
 interface IErsContextProviderProps {
@@ -45,6 +48,8 @@ const initialAppState: IErsAppState = {
   uniqueUserId: '',
   editing: false,
   editInfo: {} as IEditInfo,
+  error: false,
+  errorMessage: '',
 };
 
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
@@ -52,20 +57,20 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
 
   useEffect(() => {
     const fetchEmployees = async () => {
-      dispatch({ type: EActions.Loading });
+      dispatch({ type: EActions.Loading, payload: 'show' });
       try {
         const response = await fetch('/api/employees');
-        const { data }: IApiDataProps = await response.json();
+        const { data, message }: IApiDataProps = await response.json();
+
         if (!response.ok) {
-          console.log('log error from db: message');
+          errorHandler(message);
         } else {
           dispatch({ type: EActions.FetchEmployees, payload: data });
         }
-        // response.ok ? setEmployees(data) : setErrorState({ isError: true, errorMessage: message });
       } catch (error: any) {
-        console.log('error from the fetch api - network, unreachable server...');
-        // setErrorState({ isError: true, errorMessage: error.message });
-        // no need to change loading state since it is a thrown error from fetch: auto terminate...handle with a state-wide message
+        errorHandler(error.message);
+      } finally {
+        dispatch({ type: EActions.Loading, payload: 'hide' });
       }
     };
     fetchEmployees();
@@ -75,6 +80,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   // update with newly added user after 'POST' | 'PATCH' | 'DELETE' operation
   const updateEmployeesWithNewUserData = (data: IUserInfo[]) => {
     dispatch({ type: EActions.UpdateEmployees, payload: data });
+    dispatch({ type: EActions.Editing, payload: 'no' });
   };
 
   const modalHandler = (toggleState: EModalToggleState, component: EModalComponent) => {
@@ -85,6 +91,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
         component,
       },
     });
+    dispatch({ type: EActions.Editing, payload: 'no' });
   };
 
   const getUniqueUserIdForDeletion = async (id: string) => {
@@ -94,8 +101,16 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
 
   const userEditHandler = (argv: IEditInfo) => {
     modalHandler(EModalToggleState.show, EModalComponent.createUserForm);
-    dispatch({ type: EActions.Editing });
+    dispatch({ type: EActions.Editing, payload: 'yes' });
     dispatch({ type: EActions.EditInfo, payload: argv });
+  };
+
+  const errorHandler = (text: string) => {
+    dispatch({ type: EActions.Error, payload: 'show' });
+    dispatch({ type: EActions.ErrorMessage, payload: text });
+    setTimeout(() => {
+      dispatch({ type: EActions.Error, payload: 'hide' });
+    }, 2500);
   };
 
   // export current state values
@@ -106,6 +121,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     modalHandler,
     getUniqueUserIdForDeletion,
     userEditHandler,
+    errorHandler,
   };
 
   return <ErsContext.Provider value={ersContextValues}>{children}</ErsContext.Provider>;

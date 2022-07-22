@@ -1,5 +1,5 @@
 import { useErsContext } from '../../store/ers/ErsContext';
-import { EModalComponent, EModalToggleState } from '../../ts_ui';
+import { EModalComponent, EModalToggleState, IApiDataProps } from '../../ts_ui';
 import {
   ButtonsContainer,
   FormContent,
@@ -9,7 +9,7 @@ import {
 } from './ConfirmDeleteBox.styles';
 
 const ConfirmDelete = () => {
-  const { state, modalHandler, updateEmployeesWithNewUserData } = useErsContext();
+  const { state, modalHandler, updateEmployeesWithNewUserData, errorHandler } = useErsContext();
 
   const userDeleteHandler = () => {
     const newData = state.employees.filter(employee => employee.id !== state.uniqueUserId);
@@ -23,12 +23,13 @@ const ConfirmDelete = () => {
           method: 'DELETE',
         });
 
+        const { message }: IApiDataProps = await response.json();
+
         if (!response.ok) {
-          // 'Something Went Wrong: Log server error message: {message: ........provided by server from response.json()}',
-          console.log(response.status);
+          errorHandler(message);
         }
       } catch (error: any) {
-        console.log(error.message);
+        errorHandler(error.message);
       }
     };
     deleteUserFromDb();

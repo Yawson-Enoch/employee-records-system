@@ -24,7 +24,7 @@ export const removeRedundantSpacesInAString = (words: string): string => {
 };
 
 export const capitalizeFirstLetter = (word: string): string => {
-  return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+  return word.trim().substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
 };
 
 export const capitalizeFirstLetterOfWords = (words: string): string => {

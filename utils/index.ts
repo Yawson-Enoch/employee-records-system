@@ -1,15 +1,3 @@
-import path from 'path';
-import { readFileSync } from 'fs';
-
-export const pathToDB = () => {
-  return path.join(process.cwd(), 'data', 'employees.json');
-};
-
-export const extractEmployeesDB = (path: string) => {
-  const readDbData = readFileSync(path, 'utf8');
-  return JSON.parse(readDbData);
-};
-
 export const formatDate = (date = new Date()): string => {
   const { format } = new Intl.DateTimeFormat('en-UK', { dateStyle: 'full' });
   return format(date).toString();
@@ -42,9 +30,6 @@ export const capitalizeFirstLetter = (word: string) => {
 export const capitalizeFirstLetterOfWords = (words: string): string => {
   return removeRedundantSpacesInAString(words)
     .split(' ')
-    .map(
-      (word) =>
-        word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase()
-    )
+    .map(word => word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
     .join(' ');
 };

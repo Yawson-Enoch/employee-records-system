@@ -1,6 +1,7 @@
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useErsContext } from '../../store/ers/ErsContext';
 import { IUserInfo } from '../../ts_ui';
+import { capitalizeFirstLetterOfWords } from '../../utils';
 import {
   ButtonsContainer,
   DeleteButton,
@@ -8,12 +9,14 @@ import {
   StyledEmployeeList,
 } from './EmployeeList.styles';
 
-const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
+const EmployeeList = ({ id, firstName, lastName, email, addedDate, addedTime }: IUserInfo) => {
   const { getUniqueUserIdForDeletion } = useErsContext();
+
+  const concatAndCapitalizeNames = capitalizeFirstLetterOfWords(`${firstName} ${lastName}`);
 
   return (
     <StyledEmployeeList>
-      <p>{name}</p>
+      <p>{concatAndCapitalizeNames}</p>
       <p>{email}</p>
       <p>{addedDate}</p>
       <p>{addedTime}</p>

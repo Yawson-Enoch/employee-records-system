@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { extractEmployeesDB, pathToDB } from '.';
 import { IUserInfo } from '../../../ts_ui';
-import { extractEmployeesDB, pathToDB } from '../../../utils';
 
 export const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const filePath = pathToDB();
@@ -12,17 +12,13 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const data: IUserInfo[] = extractEmployeesDB(filePath);
 
-        const singleUserInfo = data.find(
-          (employee) => employee.id === employeeId
-        );
+        const singleUserInfo = data.find(employee => employee.id === employeeId);
 
         if (!singleUserInfo) {
           return res.status(404).json({ message: 'no matching user ID' });
         }
 
-        return res
-          .status(200)
-          .json({ message: 'success', data: singleUserInfo });
+        return res.status(200).json({ message: 'success', data: singleUserInfo });
       } catch (error) {
         return res.status(500).json({ message: 'error getting data from DB' });
       }
@@ -32,9 +28,7 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const data: IUserInfo[] = extractEmployeesDB(filePath);
 
-        const updateList = data.filter(
-          (employee) => employee.id !== employeeId
-        );
+        const updateList = data.filter(employee => employee.id !== employeeId);
 
         writeFileSync(filePath, JSON.stringify(updateList));
 

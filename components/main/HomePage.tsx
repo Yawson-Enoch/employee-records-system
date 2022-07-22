@@ -15,7 +15,7 @@ const HomePage = () => {
   }
 
   if (state.employees.length === 0) {
-    return <p style={{ textAlign: 'center' }}>Data Is Empty.</p>;
+    return <p style={{ textAlign: 'center', fontSize: '2rem' }}>No Employee Available.</p>;
   }
 
   return (

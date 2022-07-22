@@ -1,20 +1,22 @@
-import { writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import path from 'path';
 import { IUserInfo } from '../../../ts_ui';
-import {
-  extractEmployeesDB,
-  pathToDB,
-  formatDate,
-  formatTime,
-  checkEmailValidity,
-  checkNameValidity,
-  capitalizeFirstLetterOfWords,
-} from '../../../utils';
+import { checkEmailValidity, checkNameValidity, formatDate, formatTime } from '../../../utils';
 
 interface IData {
   message: string;
   data?: IUserInfo[];
 }
+
+export const pathToDB = () => {
+  return path.join(process.cwd(), 'data', 'employees.json');
+};
+
+export const extractEmployeesDB = (path: string) => {
+  const readDbData = readFileSync(path, 'utf8');
+  return JSON.parse(readDbData);
+};
 
 const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
   const filePath = pathToDB();
@@ -45,11 +47,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse<IData>) => {
         return res.status(400).json({ message: 'invalid user data' });
       }
 
-      const concatNames = `${firstName} ${lastName}`;
-
       const newUserInfo = {
         id: Date.now().toString(),
-        name: capitalizeFirstLetterOfWords(concatNames),
+        firstName,
+        lastName,
         email,
         addedDate: formatDate(),
         addedTime: formatTime(),

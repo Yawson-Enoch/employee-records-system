@@ -1,6 +1,7 @@
 export interface IUserInfo {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   addedTime: string;
   addedDate: string;

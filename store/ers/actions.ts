@@ -7,6 +7,8 @@ export const enum EActions {
   Loading = 'LOADING',
   ModalActive = 'MODAL_ACTIVE',
   UniqueUserId = 'UNIQUE_USER_ID',
+  Editing = 'EDITING',
+  EditInfo = 'EDIT_INFO',
 }
 
 export type Actions =
@@ -34,4 +36,16 @@ export type Actions =
   | {
       type: EActions.UniqueUserId;
       payload: string;
+    }
+  | {
+      type: EActions.Editing;
+    }
+  | {
+      type: EActions.EditInfo;
+      payload: {
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+      };
     };

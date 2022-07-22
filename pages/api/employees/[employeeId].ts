@@ -1,7 +1,8 @@
 import { writeFileSync } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { extractEmployeesDB, pathToDB } from '.';
-import { IUserInfo } from '../../../ts_ui';
+import { IFormValues, IUserInfo } from '../../../ts_ui';
+import { checkEmailValidity, checkNameValidity } from '../../../utils';
 
 export const handler = (req: NextApiRequest, res: NextApiResponse) => {
   const filePath = pathToDB();
@@ -28,17 +29,49 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const data: IUserInfo[] = extractEmployeesDB(filePath);
 
-        const updateList = data.filter(employee => employee.id !== employeeId);
+        const updatedList = data.filter(employee => employee.id !== employeeId);
 
-        writeFileSync(filePath, JSON.stringify(updateList));
-
-        if (!updateList) {
-          return res.status(404).json({ message: 'no matching user ID' });
-        }
+        writeFileSync(filePath, JSON.stringify(updatedList));
 
         return res.status(200).json({ message: 'user deleted successfully' });
       } catch (error) {
         return res.status(500).json({ message: 'error deleting user' });
+      }
+    }
+
+    case 'PATCH': {
+      const { firstName, lastName, email }: IFormValues = req.body;
+
+      if (
+        !checkNameValidity(firstName) ||
+        !checkNameValidity(lastName) ||
+        !checkEmailValidity(email)
+      ) {
+        return res.status(400).json({ message: 'invalid user data' });
+      }
+
+      try {
+        const data: IUserInfo[] = extractEmployeesDB(filePath);
+
+        const updatedList: IUserInfo[] = data.map(employee => {
+          if (employee.id === employeeId) {
+            employee.firstName = firstName;
+            employee.lastName = lastName;
+            employee.email = email;
+            return employee;
+          } else {
+            return employee;
+          }
+        });
+
+        writeFileSync(filePath, JSON.stringify(updatedList));
+
+        return res.status(201).json({
+          message: 'info successfully edited',
+          data: updatedList,
+        });
+      } catch (error) {
+        return res.status(500).json({ message: 'error editing user info user' });
       }
     }
 

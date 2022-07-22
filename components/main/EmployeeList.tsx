@@ -10,7 +10,7 @@ import {
 } from './EmployeeList.styles';
 
 const EmployeeList = ({ id, firstName, lastName, email, addedDate, addedTime }: IUserInfo) => {
-  const { getUniqueUserIdForDeletion } = useErsContext();
+  const { getUniqueUserIdForDeletion, userEditHandler } = useErsContext();
 
   const concatAndCapitalizeNames = capitalizeFirstLetterOfWords(`${firstName} ${lastName}`);
 
@@ -22,7 +22,7 @@ const EmployeeList = ({ id, firstName, lastName, email, addedDate, addedTime }: 
       <p>{addedTime}</p>
 
       <ButtonsContainer>
-        <EditButton>
+        <EditButton onClick={() => userEditHandler({ id, firstName, lastName, email })}>
           <FaEdit />
         </EditButton>
         <DeleteButton onClick={() => getUniqueUserIdForDeletion(id)}>

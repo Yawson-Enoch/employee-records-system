@@ -24,8 +24,8 @@ const HomePage = () => {
         <TitlesContainer>
           <li>Name</li>
           <li>Email</li>
-          <li>Date</li>
-          <li>Time</li>
+          <li>Date Added</li>
+          <li>Time Added</li>
           <li>Actions</li>
         </TitlesContainer>
         <EmployeeData />

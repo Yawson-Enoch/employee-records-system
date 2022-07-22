@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useErsContext } from '../../store/ers/ErsContext';
-import { EModalComponent, EModalToggleState, IApiDataProps } from '../../ts_ui';
+import { EModalComponent, EModalToggleState, IApiDataProps, IFormValues } from '../../ts_ui';
 import {
   CloseButton,
   Form,
@@ -11,20 +11,24 @@ import {
 } from './CreateUserForm.styles';
 import FormElements from './FormElements';
 
-interface IFormValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-}
 type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
-  const { modalHandler, updateEmployeesWithNewUserData } = useErsContext();
-  const [users, setUsers] = useState<IFormValues>({
-    firstName: '',
-    lastName: '',
-    email: '',
-  });
+  const { modalHandler, updateEmployeesWithNewUserData, state } = useErsContext();
+
+  let initialValues: IFormValues = { firstName: '', lastName: '', email: '' };
+  let method: string = 'POST';
+  let url: string = '/api/employees';
+
+  if (state.editing) {
+    const { firstName, lastName, email } = state.editInfo;
+    initialValues = { firstName, lastName, email };
+
+    method = 'PATCH';
+    url = `/api/employees/${state.editInfo.id}`;
+  }
+
+  const [users, setUsers] = useState<IFormValues>(initialValues);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     setUsers({
@@ -35,9 +39,10 @@ const CreateUserForm = () => {
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
+
     try {
-      const response = await fetch('/api/employees', {
-        method: 'post',
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -45,6 +50,7 @@ const CreateUserForm = () => {
           ...users,
         }),
       });
+
       if (!response.ok) {
         console.log(
           'Something Went Wrong: Possible Server Error',
@@ -52,6 +58,7 @@ const CreateUserForm = () => {
           // add a div to bottom of form and display 'api' error message - message: {'could not insert data'}
         );
       }
+
       const { data }: IApiDataProps = await response.json();
       updateEmployeesWithNewUserData(data);
       modalHandler(EModalToggleState.hide, EModalComponent.createUserForm);

@@ -1,5 +1,11 @@
 import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from 'react';
-import { EModalComponent, EModalToggleState, IApiDataProps, IUserInfo } from '../../ts_ui';
+import {
+  EModalComponent,
+  EModalToggleState,
+  IApiDataProps,
+  IEditInfo,
+  IUserInfo,
+} from '../../ts_ui';
 import { Actions, EActions } from './actions';
 import { ersReducer } from './reducer';
 
@@ -10,6 +16,8 @@ export interface IErsAppState {
   createUserFormActive: boolean;
   confirmDeleteBoxActive: boolean;
   uniqueUserId: string;
+  editing: boolean;
+  editInfo: IEditInfo;
 }
 
 interface IErsContextProps {
@@ -19,6 +27,7 @@ interface IErsContextProps {
   modalHandler(toggleState: EModalToggleState, component: EModalComponent): void;
   getUniqueUserIdForDeletion(id: string): void;
   userDeleteHandler(): void;
+  userEditHandler(argv: IEditInfo): void;
 }
 
 interface IErsContextProviderProps {
@@ -35,6 +44,8 @@ const initialAppState: IErsAppState = {
   createUserFormActive: false,
   confirmDeleteBoxActive: false,
   uniqueUserId: '',
+  editing: false,
+  editInfo: {} as IEditInfo,
 };
 
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
@@ -107,6 +118,12 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     deleteUserFromDb();
   };
 
+  const userEditHandler = (argv: IEditInfo) => {
+    modalHandler(EModalToggleState.show, EModalComponent.createUserForm);
+    dispatch({ type: EActions.Editing });
+    dispatch({ type: EActions.EditInfo, payload: argv });
+  };
+
   // export current state values
   const ersContextValues = {
     state,
@@ -115,6 +132,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     modalHandler,
     getUniqueUserIdForDeletion,
     userDeleteHandler,
+    userEditHandler,
   };
 
   return <ErsContext.Provider value={ersContextValues}>{children}</ErsContext.Provider>;

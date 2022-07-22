@@ -30,6 +30,7 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
         modalActive: false,
         confirmDeleteBoxActive: false,
         createUserFormActive: false,
+        editing: false,
       };
     }
 
@@ -44,6 +45,14 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
     case EActions.DeleteEmployee: {
       const newData = state.employees.filter(employee => employee.id !== state.uniqueUserId);
       return { ...state, employees: newData };
+    }
+
+    case EActions.Editing: {
+      return { ...state, editing: true };
+    }
+
+    case EActions.EditInfo: {
+      return { ...state, editInfo: action.payload };
     }
 
     default: {

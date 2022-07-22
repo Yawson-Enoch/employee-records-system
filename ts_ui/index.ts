@@ -25,3 +25,13 @@ export const enum EModalComponent {
   createUserForm = 'CreateUserForm',
   confirmDeleteBox = 'ConfirmDeleteBox',
 }
+
+export interface IFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export interface IEditInfo extends IFormValues {
+  id: string;
+}

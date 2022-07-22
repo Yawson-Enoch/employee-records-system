@@ -1,9 +1,9 @@
 import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from 'react';
 import { EModalComponent, EModalToggleState, IApiDataProps, IUserInfo } from '../../ts_ui';
 import { Actions, EActions } from './actions';
-import { emsReducer } from './reducer';
+import { ersReducer } from './reducer';
 
-export interface IEmsAppState {
+export interface IErsAppState {
   employees: IUserInfo[];
   loading: boolean;
   modalActive: boolean;
@@ -12,8 +12,8 @@ export interface IEmsAppState {
   uniqueUserId: string;
 }
 
-interface IEmsContextProps {
-  state: IEmsAppState;
+interface IErsContextProps {
+  state: IErsAppState;
   dispatch: Dispatch<Actions>;
   updateEmployeesWithNewUserData(data: IUserInfo[]): void;
   modalHandler(toggleState: EModalToggleState, component: EModalComponent): void;
@@ -21,14 +21,14 @@ interface IEmsContextProps {
   userDeleteHandler(): void;
 }
 
-interface IEmsContextProviderProps {
+interface IErsContextProviderProps {
   children: ReactNode;
 }
 
-const EmsContext = createContext({} as IEmsContextProps);
+const ErsContext = createContext({} as IErsContextProps);
 
 // initial app state
-const initialAppState: IEmsAppState = {
+const initialAppState: IErsAppState = {
   employees: [] as IUserInfo[],
   loading: false,
   modalActive: false,
@@ -37,8 +37,8 @@ const initialAppState: IEmsAppState = {
   uniqueUserId: '',
 };
 
-const EmsContextProvider = ({ children }: IEmsContextProviderProps) => {
-  const [state, dispatch] = useReducer(emsReducer, initialAppState);
+const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
+  const [state, dispatch] = useReducer(ersReducer, initialAppState);
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -108,7 +108,7 @@ const EmsContextProvider = ({ children }: IEmsContextProviderProps) => {
   };
 
   // export current state values
-  const emsContextValues = {
+  const ersContextValues = {
     state,
     dispatch,
     updateEmployeesWithNewUserData,
@@ -117,9 +117,9 @@ const EmsContextProvider = ({ children }: IEmsContextProviderProps) => {
     userDeleteHandler,
   };
 
-  return <EmsContext.Provider value={emsContextValues}>{children}</EmsContext.Provider>;
+  return <ErsContext.Provider value={ersContextValues}>{children}</ErsContext.Provider>;
 };
 
-const useEmsContext = () => useContext(EmsContext);
+const useErsContext = () => useContext(ErsContext);
 
-export { useEmsContext, EmsContextProvider };
+export { useErsContext, ErsContextProvider };

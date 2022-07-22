@@ -1,4 +1,4 @@
-import { useEmsContext } from '../../store/ems/EmsContext';
+import { useErsContext } from '../../store/ers/ErsContext';
 import { EModalComponent, EModalToggleState } from '../../ts_ui';
 import {
   ButtonsContainer,
@@ -9,7 +9,7 @@ import {
 } from './ConfirmDelete.styles';
 
 const ConfirmDelete = () => {
-  const { modalHandler, userDeleteHandler } = useEmsContext();
+  const { modalHandler, userDeleteHandler } = useErsContext();
 
   return (
     <ConfirmDeleteBox>
@@ -18,12 +18,12 @@ const ConfirmDelete = () => {
           <p>Are you sure you want to delete?</p>
           <ButtonsContainer>
             <NoButton
-              type="button"
+              type='button'
               onClick={() => modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox)}
             >
               no
             </NoButton>
-            <YesButton type="button" onClick={userDeleteHandler}>
+            <YesButton type='button' onClick={userDeleteHandler}>
               yes
             </YesButton>
           </ButtonsContainer>

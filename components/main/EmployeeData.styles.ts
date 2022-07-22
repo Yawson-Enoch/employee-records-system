@@ -8,4 +8,8 @@ export const StyledEmployeesData = styled(motion.ul).attrs(() => {
     initial: 'initial',
     animate: 'animate',
   };
-})``;
+})`
+  border-right: var(--border-secondary);
+  border-left: var(--border-secondary);
+  border-bottom: var(--border-secondary);
+`;

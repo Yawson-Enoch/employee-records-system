@@ -9,8 +9,8 @@ export const bumpEffect = {
 
 export const scaleUp = {
   hide: {
-    translateX: 0,
-    translateY: 0,
+    translateX: '-30%',
+    translateY: '-30%',
     scale: 0.5,
     opacity: 0,
   },
@@ -20,9 +20,7 @@ export const scaleUp = {
     scale: 1,
     opacity: 1,
     transition: {
-      type: 'spring',
-      stiffness: 70,
-      damping: 10,
+      duration: 0.3,
     },
   },
 };

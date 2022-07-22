@@ -1,10 +1,15 @@
-import { FaTrash } from 'react-icons/fa';
-import { useEmsContext } from '../../store/ems/EmsContext';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import { useErsContext } from '../../store/ers/ErsContext';
 import { IUserInfo } from '../../ts_ui';
-import { DeleteButton, StyledEmployeeList } from './EmployeeList.styles';
+import {
+  ButtonsContainer,
+  DeleteButton,
+  EditButton,
+  StyledEmployeeList,
+} from './EmployeeList.styles';
 
 const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
-  const { getUniqueUserIdForDeletion } = useEmsContext();
+  const { getUniqueUserIdForDeletion } = useErsContext();
 
   return (
     <StyledEmployeeList>
@@ -13,13 +18,14 @@ const EmployeeList = ({ id, name, email, addedDate, addedTime }: IUserInfo) => {
       <p>{addedDate}</p>
       <p>{addedTime}</p>
 
-      {/* <GoToDetailsButton type='button' onClick={() => goToDetails(id)}>
-        Go To Details
-      </GoToDetailsButton> */}
-
-      <DeleteButton onClick={() => getUniqueUserIdForDeletion(id)}>
-        <FaTrash />
-      </DeleteButton>
+      <ButtonsContainer>
+        <EditButton>
+          <FaEdit />
+        </EditButton>
+        <DeleteButton onClick={() => getUniqueUserIdForDeletion(id)}>
+          <FaTrash />
+        </DeleteButton>
+      </ButtonsContainer>
     </StyledEmployeeList>
   );
 };

@@ -6,23 +6,31 @@ export const StyledEmployeeList = styled.li`
   grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
   grid-template-rows: 3rem;
   place-items: center;
-  border-bottom: 1px solid var(--grey-500);
   padding: 1rem 0;
   transition: border 0.3s linear;
 
-  &:hover {
-    border-bottom: 1px solid var(--clr-accent-primary);
+  &:not(:last-child) {
+    border-bottom: var(--border-secondary);
   }
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  gap: var(--space-xtra-small);
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    padding: 0;
+  }
+`;
+
+export const EditButton = styled(GenericButton)`
+  color: var(--clr-accent-secondary);
 `;
 
 export const DeleteButton = styled(GenericButton)`
   color: var(--clr-error);
-  height: 3.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    font-size: 3rem;
-  }
 `;

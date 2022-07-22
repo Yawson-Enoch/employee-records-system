@@ -16,15 +16,5 @@ export const TitlesContainer = styled(motion.ul)`
   justify-items: center;
   gap: var(--space-xtra-small);
   padding: 1rem 0;
-  border-radius: var(--radius-medium);
-  background-color: var(--clr-accent-primary);
-`;
-
-export const GoToDetailsButton = styled.button`
-  background-color: transparent;
-  border: 2px solid var(--clr-accent-secondary);
-  border-radius: var(--radium-medium);
-  padding: 0.3rem 0.5rem;
-  height: 3.5rem;
-  color: var(--clr-secondary);
+  border: var(--border-secondary);
 `;

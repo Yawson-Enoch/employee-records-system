@@ -22,17 +22,14 @@ document.body.dataset.theme = getUserPreference();
 `;
 
 export default class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -55,17 +52,12 @@ export default class MyDocument extends Document {
       <Html lang='en'>
         <Head>
           <meta name='author' content='Yawson Enoch' />
-          <meta name='keywords' content='ems, employee records system' />
-          <meta
-            name='description'
-            content='Employee management system with CRUD operations.'
-          />
+          <meta name='keywords' content='ers, employee records system' />
+          <meta name='description' content='Employee records system with CRUD operations.' />
           <link rel='icon' href='/favicon.ico' />
         </Head>
         <body>
-          <script
-            dangerouslySetInnerHTML={{ __html: injectScriptOnInitialLoad }}
-          />
+          <script dangerouslySetInnerHTML={{ __html: injectScriptOnInitialLoad }} />
           <Main />
           <NextScript />
         </body>

@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useEmsContext } from '../../store/ems/EmsContext';
+import { useErsContext } from '../../store/ers/ErsContext';
 import { EModalComponent, EModalToggleState, IApiDataProps } from '../../ts_ui';
 import {
   CloseButton,
@@ -19,7 +19,7 @@ interface IFormValues {
 type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
-  const { modalHandler, updateEmployeesWithNewUserData } = useEmsContext();
+  const { modalHandler, updateEmployeesWithNewUserData } = useErsContext();
   const [users, setUsers] = useState<IFormValues>({
     firstName: '',
     lastName: '',
@@ -111,12 +111,12 @@ const CreateUserForm = () => {
         })}
         <FormBtnContainer>
           <CloseButton
-            type="button"
+            type='button'
             onClick={() => modalHandler(EModalToggleState.hide, EModalComponent.createUserForm)}
           >
             Close
           </CloseButton>
-          <SubmitButton type="submit">Submit</SubmitButton>
+          <SubmitButton type='submit'>Submit</SubmitButton>
         </FormBtnContainer>
       </Form>
     </FormContainer>

@@ -1,8 +1,8 @@
 import { EModalComponent, EModalToggleState } from '../../ts_ui';
 import { Actions, EActions } from './actions';
-import { IEmsAppState } from './EmsContext';
+import { IErsAppState } from './ErsContext';
 
-export const emsReducer = (state: IEmsAppState, action: Actions): IEmsAppState => {
+export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState => {
   switch (action.type) {
     case EActions.Loading: {
       return { ...state, loading: true };

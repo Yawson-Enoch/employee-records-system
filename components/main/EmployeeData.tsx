@@ -1,9 +1,9 @@
-import { useEmsContext } from '../../store/ems/EmsContext';
+import { useErsContext } from '../../store/ers/ErsContext';
 import { StyledEmployeesData } from './EmployeeData.styles';
 import EmployeeList from './EmployeeList';
 
 const EmployeeData = () => {
-  const { state } = useEmsContext();
+  const { state } = useErsContext();
   return (
     <StyledEmployeesData>
       {state.employees.map(employee => (

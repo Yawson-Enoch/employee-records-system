@@ -97,10 +97,11 @@ export const GlobalStyles = createGlobalStyle`
   --max-width: 1024px;
   --transition-3s: 0.3s ease-in-out;
   --transition-5s: 0.5s ease-in-out;
+  --border-secondary: 1px solid var(--grey-500);
 }
 
 body[data-theme='light'] {
-  --clr-primary: var(--grey-100);
+  --clr-primary: var(--grey-300);
   --clr-secondary: var(--grey-800);
   --clr-accent-tertiary: rgb(212, 228, 250);
   --border-primary: 2px solid rgba(0, 0, 0, 0.15);
@@ -112,7 +113,7 @@ body[data-theme='light'] {
 
 body[data-theme='dark'] {
   --clr-primary: #01040e;
-  --clr-secondary: var(--grey-200);
+  --clr-secondary: var(--grey-300);
   --clr-accent-tertiary: rgb(1, 5, 15);
   --border-primary: 2px solid rgba(255, 255, 255, 0.05);
   --box-shadow-outside: 4px 4px 4px var(--clr-black),

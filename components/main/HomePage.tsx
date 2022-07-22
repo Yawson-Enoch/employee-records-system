@@ -1,10 +1,10 @@
-import { useEmsContext } from '../../store/ems/EmsContext';
+import { useErsContext } from '../../store/ers/ErsContext';
 import EmployeeData from './EmployeeData';
 import { HomepageWrapper, StyledMain, TitlesContainer } from './HomePage.styles';
 import Loader from './Loader';
 
 const HomePage = () => {
-  const { state } = useEmsContext();
+  const { state } = useErsContext();
 
   if (state.loading || !state.employees) {
     return (

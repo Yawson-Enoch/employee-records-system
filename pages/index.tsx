@@ -5,10 +5,10 @@ import ConfirmDelete from '../components/main/ConfirmDelete';
 import CreateUserForm from '../components/main/CreateUserForm';
 import HomePage from '../components/main/HomePage';
 import Modal from '../components/main/Modal';
-import { useEmsContext } from '../store/ems/EmsContext';
+import { useErsContext } from '../store/ers/ErsContext';
 
 const Home = () => {
-  const { state } = useEmsContext();
+  const { state } = useErsContext();
   return (
     <>
       <Head>

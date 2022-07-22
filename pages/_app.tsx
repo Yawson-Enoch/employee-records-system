@@ -1,16 +1,16 @@
 import type { AppProps } from 'next/app';
 import Layout from '../components/layout/Layout';
-import { EmsContextProvider } from '../store/ems/EmsContext';
+import { ErsContextProvider } from '../store/ers/ErsContext';
 import { AppThemeContextProvider } from '../styles/AppThemeContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppThemeContextProvider>
-      <EmsContextProvider>
+      <ErsContextProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </EmsContextProvider>
+      </ErsContextProvider>
     </AppThemeContextProvider>
   );
 }

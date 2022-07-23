@@ -77,7 +77,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   }, []);
 
   // event handlers
-  // update with newly added user after 'POST' | 'PATCH' | 'DELETE' operation
+  // update employees state after 'POST' | 'PATCH' | 'DELETE' operations
   const updateEmployeesWithNewUserData = (data: IUserInfo[]) => {
     dispatch({ type: EActions.UpdateEmployees, payload: data });
     dispatch({ type: EActions.Editing, payload: 'no' });
@@ -113,7 +113,6 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     }, 2500);
   };
 
-  // export current state values
   const ersContextValues = {
     state,
     dispatch,

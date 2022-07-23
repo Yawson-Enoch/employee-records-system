@@ -1,17 +1,16 @@
-import { writeFileSync } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { extractEmployeesDB, pathToDB } from '.';
+import { addToEmployeesDB, extractEmployeesDB, pathToDB } from '.';
 import { IFormValues, IUserInfo } from '../../../ts_ui';
 import { checkEmailValidity, checkNameValidity } from '../../../utils';
 
-export const handler = (req: NextApiRequest, res: NextApiResponse) => {
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const filePath = pathToDB();
 
   const { employeeId } = req.query;
   switch (req.method) {
     case 'GET': {
       try {
-        const data: IUserInfo[] = extractEmployeesDB(filePath);
+        const data: IUserInfo[] = await extractEmployeesDB(filePath);
 
         const singleUserInfo = data.find(employee => employee.id === employeeId);
 
@@ -27,11 +26,11 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
     case 'DELETE': {
       try {
-        const data: IUserInfo[] = extractEmployeesDB(filePath);
+        const data: IUserInfo[] = await extractEmployeesDB(filePath);
 
         const updatedList = data.filter(employee => employee.id !== employeeId);
 
-        writeFileSync(filePath, JSON.stringify(updatedList));
+        await addToEmployeesDB(filePath, updatedList);
 
         return res.status(200).json({ message: 'user deleted successfully.' });
       } catch (error) {
@@ -51,7 +50,7 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       try {
-        const data: IUserInfo[] = extractEmployeesDB(filePath);
+        const data: IUserInfo[] = await extractEmployeesDB(filePath);
 
         const updatedList: IUserInfo[] = data.map(employee => {
           if (employee.id === employeeId) {
@@ -64,7 +63,7 @@ export const handler = (req: NextApiRequest, res: NextApiResponse) => {
           }
         });
 
-        writeFileSync(filePath, JSON.stringify(updatedList));
+        await addToEmployeesDB(filePath, updatedList);
 
         return res.status(201).json({
           message: 'user info successfully edited.',

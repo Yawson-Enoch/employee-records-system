@@ -6,7 +6,7 @@ const Footer = () => {
     <StyledFooter>
       <FooterContent>
         <p>
-          &copy; <span>{year} | GROUP 37</span>
+          &copy; <span>{year} | GyBex</span>
         </p>
       </FooterContent>
     </StyledFooter>

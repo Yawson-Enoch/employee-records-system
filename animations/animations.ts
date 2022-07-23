@@ -60,20 +60,3 @@ export const slideRight = {
     damping: 10,
   },
 };
-
-export const addButtonAnimation = {
-  initial: {
-    x: 300,
-    scale: 0.5,
-  },
-  animate: {
-    x: 0,
-    scale: 1,
-  },
-  hover: {
-    scale: 1.1,
-  },
-  tap: {
-    scale: 0.9,
-  },
-};

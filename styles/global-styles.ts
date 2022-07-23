@@ -113,7 +113,7 @@ body[data-theme='light'] {
 
 body[data-theme='dark'] {
   --clr-primary: #01040e;
-  --clr-secondary: var(--grey-300);
+  --clr-secondary: var(--grey-400);
   --clr-accent-tertiary: rgb(1, 5, 15);
   --border-primary: 2px solid rgba(255, 255, 255, 0.05);
   --box-shadow-outside: 4px 4px 4px var(--clr-black),

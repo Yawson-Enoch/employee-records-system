@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { addButtonAnimation } from '../../animations/animations';
+import { bumpEffect } from '../../animations/animations';
 
 export const StyledAddButton = styled(motion.button).attrs(() => {
   return {
-    variants: addButtonAnimation,
-    initial: 'initial',
-    animate: 'animate',
+    variants: bumpEffect,
     whileHover: 'hover',
     whileTap: 'tap',
   };

@@ -8,10 +8,7 @@ export const StyledEmployeeList = styled.li`
   place-items: center;
   padding: 1rem 0;
   transition: border 0.3s linear;
-
-  &:not(:last-child) {
-    border-bottom: var(--border-secondary);
-  }
+  border-top: var(--border-primary);
 `;
 
 export const ButtonsContainer = styled.div`

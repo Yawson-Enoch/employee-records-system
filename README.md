@@ -1,5 +1,11 @@
-# GROUP 37 PROJECT WORK
+# EMPLOYEE RECORDS SYSTEM - ERS
 
-## GROUP MEMBERS
+Employee records system with real-time CRUD operations.
 
-- yawson enoch
+## Install project dependencies:
+
+`yarn install` or `npm install`
+
+## Run development server:
+
+`yarn dev` or `npm run dev`

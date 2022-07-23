@@ -1,6 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
-import AddButton from '../components/main/AddButton';
 import ConfirmDelete from '../components/main/ConfirmDeleteBox';
 import CreateUserForm from '../components/main/CreateUserForm';
 import ErrorMessageBox from '../components/main/ErrorMessageBox';
@@ -17,8 +16,9 @@ const Home = () => {
         <meta name='keywords' content='home page' />
         <title>Ers</title>
       </Head>
-      <HomePage />
-      <AddButton />
+      <main>
+        <HomePage />
+      </main>
       <AnimatePresence>
         {state.createUserFormActive && <CreateUserForm key='form' />}
         {state.confirmDeleteBoxActive && <ConfirmDelete key='delete' />}

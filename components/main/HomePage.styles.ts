@@ -1,9 +1,22 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { slideRight } from '../../animations/animations';
 import { Wrapper } from '../../styles/utils';
 
-export const HomepageWrapper = styled(motion.div)`
+export const HomepageWrapper = styled.div`
   ${Wrapper}
+`;
+
+export const EmployeesDetails = styled(motion.div).attrs(() => {
+  return {
+    variants: slideRight,
+    initial: 'initial',
+    animate: 'animate',
+  };
+})`
+  border: var(--border-primary);
+  margin-inline: auto;
+  border-radius: var(--radius-small);
 `;
 
 export const TitlesContainer = styled(motion.ul)`
@@ -14,5 +27,4 @@ export const TitlesContainer = styled(motion.ul)`
   justify-items: center;
   gap: var(--space-xtra-small);
   padding: 1rem 0;
-  border: var(--border-secondary);
 `;

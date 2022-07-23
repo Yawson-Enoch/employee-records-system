@@ -1,17 +1,14 @@
 import { useErsContext } from '../../store/ers/ErsContext';
+import AddButton from './AddButton';
 import EmployeeData from './EmployeeData';
-import { HomepageWrapper, TitlesContainer } from './HomePage.styles';
+import { EmployeesDetails, HomepageWrapper, TitlesContainer } from './HomePage.styles';
 import Loader from './Loader';
 
 const HomePage = () => {
   const { state } = useErsContext();
 
   if (state.loading || !state.employees) {
-    return (
-      <main>
-        <Loader />
-      </main>
-    );
+    return <Loader />;
   }
 
   if (state.employees.length === 0) {
@@ -19,8 +16,8 @@ const HomePage = () => {
   }
 
   return (
-    <main>
-      <HomepageWrapper>
+    <HomepageWrapper>
+      <EmployeesDetails>
         <TitlesContainer>
           <li>Name</li>
           <li>Email</li>
@@ -29,8 +26,9 @@ const HomePage = () => {
           <li>Actions</li>
         </TitlesContainer>
         <EmployeeData />
-      </HomepageWrapper>
-    </main>
+      </EmployeesDetails>
+      <AddButton />
+    </HomepageWrapper>
   );
 };
 

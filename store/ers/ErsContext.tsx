@@ -21,6 +21,7 @@ export interface IErsAppState {
   error: boolean;
   errorMessage: string;
   searchTerm: string;
+  sortOption: string;
 }
 
 interface IErsContextProps {
@@ -32,6 +33,7 @@ interface IErsContextProps {
   userEditHandler(argv: IEditInfo): void;
   errorHandler(text: string): void;
   searchTermHandler(text: string): void;
+  sortOptionHandler(text: string): void;
 }
 
 interface IErsContextProviderProps {
@@ -53,16 +55,26 @@ const initialAppState: IErsAppState = {
   error: false,
   errorMessage: '',
   searchTerm: '',
+  sortOption: '',
 };
 
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   const [state, dispatch] = useReducer(ersReducer, initialAppState);
 
-  let url = state.searchTerm ? `/api/employees/search/${state.searchTerm}` : '/api/employees';
+  let url: string = '/api/employees';
+  if (state.searchTerm) {
+    url = `/api/employees/search/${state.searchTerm}`;
+  }
+  if (state.sortOption) {
+    url = `/api/employees/sort/${state.sortOption}`;
+  }
 
   useEffect(() => {
     const fetchEmployees = async () => {
-      dispatch({ type: EActions.Loading, payload: `${state.searchTerm ? 'hide' : 'show'}` });
+      dispatch({
+        type: EActions.Loading,
+        payload: `${state.searchTerm || state.sortOption ? 'hide' : 'show'}`,
+      });
       try {
         const response = await fetch(url);
         const { data, message }: IApiDataProps = await response.json();
@@ -79,7 +91,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
       }
     };
     fetchEmployees();
-  }, [state.searchTerm]);
+  }, [state.searchTerm, state.sortOption]);
 
   // event handlers
   // update employees state after 'POST' | 'PATCH' | 'DELETE' operations
@@ -120,6 +132,10 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     dispatch({ type: EActions.SearchTerm, payload: text });
   };
 
+  const sortOptionHandler = (text: string) => {
+    dispatch({ type: EActions.SortOption, payload: text });
+  };
+
   const ersContextValues = {
     state,
     dispatch,
@@ -129,6 +145,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     userEditHandler,
     errorHandler,
     searchTermHandler,
+    sortOptionHandler,
   };
 
   return <ErsContext.Provider value={ersContextValues}>{children}</ErsContext.Provider>;

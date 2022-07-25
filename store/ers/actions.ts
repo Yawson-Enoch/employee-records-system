@@ -11,6 +11,7 @@ export const enum EActions {
   Error = 'ERROR',
   ErrorMessage = 'ERROR_MESSAGE',
   SearchTerm = 'SEARCH_TERM',
+  SortOption = 'SORT_OPTION',
 }
 
 export type Actions =
@@ -54,5 +55,9 @@ export type Actions =
     }
   | {
       type: EActions.SearchTerm;
+      payload: string;
+    }
+  | {
+      type: EActions.SortOption;
       payload: string;
     };

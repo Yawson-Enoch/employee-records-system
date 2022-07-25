@@ -65,7 +65,11 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
     }
 
     case EActions.SearchTerm: {
-      return { ...state, searchTerm: action.payload };
+      return { ...state, sortOption: '', searchTerm: action.payload };
+    }
+
+    case EActions.SortOption: {
+      return { ...state, searchTerm: '', sortOption: action.payload };
     }
 
     default: {

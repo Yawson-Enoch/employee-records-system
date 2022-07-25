@@ -10,6 +10,7 @@ export const enum EActions {
   EditInfo = 'EDIT_INFO',
   Error = 'ERROR',
   ErrorMessage = 'ERROR_MESSAGE',
+  SearchTerm = 'SEARCH_TERM',
 }
 
 export type Actions =
@@ -49,5 +50,9 @@ export type Actions =
     }
   | {
       type: EActions.ErrorMessage;
+      payload: string;
+    }
+  | {
+      type: EActions.SearchTerm;
       payload: string;
     };

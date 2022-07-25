@@ -20,6 +20,7 @@ export interface IErsAppState {
   editInfo: IEditInfo;
   error: boolean;
   errorMessage: string;
+  searchTerm: string;
 }
 
 interface IErsContextProps {
@@ -30,6 +31,7 @@ interface IErsContextProps {
   getUniqueUserIdForDeletion(id: string): void;
   userEditHandler(argv: IEditInfo): void;
   errorHandler(text: string): void;
+  searchTermHandler(text: string): void;
 }
 
 interface IErsContextProviderProps {
@@ -50,16 +52,19 @@ const initialAppState: IErsAppState = {
   editInfo: {} as IEditInfo,
   error: false,
   errorMessage: '',
+  searchTerm: '',
 };
 
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   const [state, dispatch] = useReducer(ersReducer, initialAppState);
 
+  let url = state.searchTerm ? `/api/employees/search/${state.searchTerm}` : '/api/employees';
+
   useEffect(() => {
     const fetchEmployees = async () => {
-      dispatch({ type: EActions.Loading, payload: 'show' });
+      dispatch({ type: EActions.Loading, payload: `${state.searchTerm ? 'hide' : 'show'}` });
       try {
-        const response = await fetch('/api/employees');
+        const response = await fetch(url);
         const { data, message }: IApiDataProps = await response.json();
 
         if (!response.ok) {
@@ -74,7 +79,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
       }
     };
     fetchEmployees();
-  }, []);
+  }, [state.searchTerm]);
 
   // event handlers
   // update employees state after 'POST' | 'PATCH' | 'DELETE' operations
@@ -111,6 +116,10 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     }, 2500);
   };
 
+  const searchTermHandler = (text: string) => {
+    dispatch({ type: EActions.SearchTerm, payload: text });
+  };
+
   const ersContextValues = {
     state,
     dispatch,
@@ -119,6 +128,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     getUniqueUserIdForDeletion,
     userEditHandler,
     errorHandler,
+    searchTermHandler,
   };
 
   return <ErsContext.Provider value={ersContextValues}>{children}</ErsContext.Provider>;

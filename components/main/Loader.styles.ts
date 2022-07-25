@@ -12,7 +12,7 @@ export const StyledLoader = styled.div`
   align-items: center;
   transform-origin: center;
   animation: spinner 0.5s linear infinite;
-  margin-inline: auto;
+  margin: var(--space-large) auto;
 
   &::before {
     content: '';

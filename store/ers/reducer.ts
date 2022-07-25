@@ -64,6 +64,10 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
       return { ...state, errorMessage: action.payload };
     }
 
+    case EActions.SearchTerm: {
+      return { ...state, searchTerm: action.payload };
+    }
+
     default: {
       throw new Error('action not found.');
     }

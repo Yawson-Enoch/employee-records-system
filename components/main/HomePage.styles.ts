@@ -22,6 +22,10 @@ export const SearchAndSortOptionsContainer = styled.div`
     border-radius: var(--radius-small);
     padding: 0.1rem 0.3rem;
   }
+
+  select {
+    margin-left: var(--space-xtra-small);
+  }
 `;
 
 export const EmployeesDetails = styled(motion.div).attrs(() => {

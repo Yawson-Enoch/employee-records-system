@@ -1,8 +1,15 @@
 import { useErsContext } from '../../store/ers/ErsContext';
 import AddButton from './AddButton';
 import EmployeeData from './EmployeeData';
-import { EmployeesDetails, HomepageWrapper, TitlesContainer } from './HomePage.styles';
+import {
+  EmployeesDetails,
+  HomepageWrapper,
+  SearchAndSortOptionsContainer,
+  TitlesContainer,
+} from './HomePage.styles';
 import Loader from './Loader';
+import SearchForm from './SearchForm';
+import SortForm from './SortForm';
 
 const HomePage = () => {
   const { state } = useErsContext();
@@ -17,6 +24,10 @@ const HomePage = () => {
 
   return (
     <HomepageWrapper>
+      <SearchAndSortOptionsContainer>
+        <SearchForm />
+        <SortForm />
+      </SearchAndSortOptionsContainer>
       <EmployeesDetails>
         <TitlesContainer>
           <li>Name</li>

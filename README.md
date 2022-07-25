@@ -1,6 +1,6 @@
 # EMPLOYEE RECORDS SYSTEM - ERS
 
-Employee records system with real-time CRUD operations.
+A Nextjs Employee records system with real-time CRUD operations.
 
 ## Install project dependencies:
 

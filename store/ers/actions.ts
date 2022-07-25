@@ -38,7 +38,6 @@ export type Actions =
     }
   | {
       type: EActions.Editing;
-      payload: 'yes' | 'no';
     }
   | {
       type: EActions.EditInfo;

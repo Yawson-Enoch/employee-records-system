@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { GlobalStyles } from './global-styles';
+import { GlobalStyles } from './global.styles';
 
 interface IAppThemeContext {
   theme: string;

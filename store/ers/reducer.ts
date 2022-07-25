@@ -33,6 +33,7 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
         modalActive: false,
         confirmDeleteBoxActive: false,
         createUserFormActive: false,
+        editing: false,
       };
     }
 
@@ -45,10 +46,7 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
     }
 
     case EActions.Editing: {
-      if (action.payload === 'yes') {
-        return { ...state, editing: true };
-      }
-      return { ...state, editing: false };
+      return { ...state, editing: true };
     }
 
     case EActions.EditInfo: {

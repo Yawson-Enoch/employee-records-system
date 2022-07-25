@@ -80,7 +80,6 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   // update employees state after 'POST' | 'PATCH' | 'DELETE' operations
   const updateEmployeesWithNewUserData = (data: IUserInfo[]) => {
     dispatch({ type: EActions.UpdateEmployees, payload: data });
-    dispatch({ type: EActions.Editing, payload: 'no' });
   };
 
   const modalHandler = (toggleState: EModalToggleState, component: EModalComponent) => {
@@ -91,7 +90,6 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
         component,
       },
     });
-    dispatch({ type: EActions.Editing, payload: 'no' });
   };
 
   const getUniqueUserIdForDeletion = async (id: string) => {
@@ -101,7 +99,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
 
   const userEditHandler = (argv: IEditInfo) => {
     modalHandler(EModalToggleState.show, EModalComponent.createUserForm);
-    dispatch({ type: EActions.Editing, payload: 'yes' });
+    dispatch({ type: EActions.Editing });
     dispatch({ type: EActions.EditInfo, payload: argv });
   };
 

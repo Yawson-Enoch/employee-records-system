@@ -25,6 +25,7 @@ export const Logo = styled.p`
 `;
 
 export const ThemeTogglerAndNav = styled.div`
-  display: flex;
-  gap: var(--space-large);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-small);
 `;

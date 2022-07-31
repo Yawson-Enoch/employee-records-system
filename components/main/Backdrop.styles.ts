@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const PageModal = styled(motion.div).attrs(() => {
+export const StyledBackdrop = styled(motion.div).attrs(() => {
   return {
     initial: {
       opacity: 0,

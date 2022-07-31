@@ -1,4 +1,4 @@
-import { EModalComponent, EModalToggleState } from '../../ts_ui';
+import { EModalComponent, EBackdropToggleState } from '../../ts_ui';
 import { Actions, EActions } from './actions';
 import { IErsAppState } from './ErsContext';
 
@@ -15,22 +15,22 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
       return { ...state, employees: action.payload, loading: false };
     }
 
-    case EActions.ModalActive: {
+    case EActions.BackdropActive: {
       if (
-        action.payload.toggleState === EModalToggleState.show &&
+        action.payload.toggleState === EBackdropToggleState.show &&
         action.payload.component === EModalComponent.createUserForm
       ) {
-        return { ...state, modalActive: true, createUserFormActive: true };
+        return { ...state, backdropActive: true, createUserFormActive: true };
       }
       if (
-        action.payload.toggleState === EModalToggleState.show &&
+        action.payload.toggleState === EBackdropToggleState.show &&
         action.payload.component === EModalComponent.confirmDeleteBox
       ) {
-        return { ...state, modalActive: true, confirmDeleteBoxActive: true };
+        return { ...state, backdropActive: true, confirmDeleteBoxActive: true };
       }
       return {
         ...state,
-        modalActive: false,
+        backdropActive: false,
         confirmDeleteBoxActive: false,
         createUserFormActive: false,
         editing: false,

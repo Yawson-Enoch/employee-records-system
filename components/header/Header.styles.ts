@@ -4,7 +4,7 @@ import { Wrapper } from '../../styles/utils';
 export const StyledHeader = styled.header`
   display: grid;
   align-content: center;
-  border-bottom: var(--border-primary);
+  box-shadow: 0 5px 5px 0 var(--clr-shadow);
 `;
 
 export const HeaderContent = styled.div`

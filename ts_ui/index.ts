@@ -16,7 +16,7 @@ export interface IApiDataProps {
   data: IUserInfo[];
 }
 
-export const enum EModalToggleState {
+export const enum EBackdropToggleState {
   hide = 'Hide',
   show = 'Show',
 }

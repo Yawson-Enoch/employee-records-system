@@ -10,7 +10,7 @@ interface IFormElements {
   errorMessage: string;
   pattern?: string;
   autofocus?: boolean;
-  onChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void;
+  onChange(e: ChangeEvent<HTMLInputElement>): void;
 }
 
 const FormElements = (props: IFormElements) => {

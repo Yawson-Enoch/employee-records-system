@@ -1,7 +1,7 @@
 import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from 'react';
 import {
   EModalComponent,
-  EModalToggleState,
+  EBackdropToggleState,
   IApiDataProps,
   IEditInfo,
   IUserInfo,
@@ -12,7 +12,7 @@ import { ersReducer } from './reducer';
 export interface IErsAppState {
   employees: IUserInfo[];
   loading: boolean;
-  modalActive: boolean;
+  backdropActive: boolean;
   createUserFormActive: boolean;
   confirmDeleteBoxActive: boolean;
   uniqueUserId: string;
@@ -28,7 +28,7 @@ interface IErsContextProps {
   state: IErsAppState;
   dispatch: Dispatch<Actions>;
   updateEmployeesWithNewUserData(data: IUserInfo[]): void;
-  modalHandler(toggleState: EModalToggleState, component: EModalComponent): void;
+  backdropAndmodalsHandler(toggleState: EBackdropToggleState, component: EModalComponent): void;
   getUniqueUserIdForDeletion(id: string): void;
   userEditHandler(argv: IEditInfo): void;
   errorHandler(text: string): void;
@@ -46,7 +46,7 @@ const ErsContext = createContext({} as IErsContextProps);
 const initialAppState: IErsAppState = {
   employees: [] as IUserInfo[],
   loading: false,
-  modalActive: false,
+  backdropActive: false,
   createUserFormActive: false,
   confirmDeleteBoxActive: false,
   uniqueUserId: '',
@@ -77,13 +77,14 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
       });
       try {
         const response = await fetch(url);
+
         const { data, message }: IApiDataProps = await response.json();
 
         if (!response.ok) {
-          errorHandler(message);
-        } else {
-          dispatch({ type: EActions.FetchEmployees, payload: data });
+          throw new Error(message);
         }
+
+        dispatch({ type: EActions.FetchEmployees, payload: data });
       } catch (error: any) {
         errorHandler(error.message);
       } finally {
@@ -99,9 +100,12 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     dispatch({ type: EActions.UpdateEmployees, payload: data });
   };
 
-  const modalHandler = (toggleState: EModalToggleState, component: EModalComponent) => {
+  const backdropAndmodalsHandler = (
+    toggleState: EBackdropToggleState,
+    component: EModalComponent
+  ) => {
     dispatch({
-      type: EActions.ModalActive,
+      type: EActions.BackdropActive,
       payload: {
         toggleState,
         component,
@@ -110,12 +114,12 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   };
 
   const getUniqueUserIdForDeletion = async (id: string) => {
-    modalHandler(EModalToggleState.show, EModalComponent.confirmDeleteBox);
+    backdropAndmodalsHandler(EBackdropToggleState.show, EModalComponent.confirmDeleteBox);
     dispatch({ type: EActions.UniqueUserId, payload: id });
   };
 
   const userEditHandler = (argv: IEditInfo) => {
-    modalHandler(EModalToggleState.show, EModalComponent.createUserForm);
+    backdropAndmodalsHandler(EBackdropToggleState.show, EModalComponent.createUserForm);
     dispatch({ type: EActions.Editing });
     dispatch({ type: EActions.EditInfo, payload: argv });
   };
@@ -140,7 +144,7 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     state,
     dispatch,
     updateEmployeesWithNewUserData,
-    modalHandler,
+    backdropAndmodalsHandler,
     getUniqueUserIdForDeletion,
     userEditHandler,
     errorHandler,

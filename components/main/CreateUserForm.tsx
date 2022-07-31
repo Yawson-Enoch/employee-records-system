@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useErsContext } from '../../store/ers/ErsContext';
-import { EModalComponent, EModalToggleState, IApiDataProps, IFormValues } from '../../ts_ui';
+import { EModalComponent, EBackdropToggleState, IApiDataProps, IFormValues } from '../../ts_ui';
 import {
   CloseButton,
   Form,
@@ -14,7 +14,8 @@ import FormElements from './FormElements';
 type dynamicKey = keyof IFormValues;
 
 const CreateUserForm = () => {
-  const { modalHandler, updateEmployeesWithNewUserData, state, errorHandler } = useErsContext();
+  const { backdropAndmodalsHandler, updateEmployeesWithNewUserData, state, errorHandler } =
+    useErsContext();
 
   let initialValues: IFormValues = { firstName: '', lastName: '', email: '' };
   let method: string = 'POST';
@@ -30,10 +31,10 @@ const CreateUserForm = () => {
 
   const [users, setUsers] = useState<IFormValues>(initialValues);
 
-  const changeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setUsers({
       ...users,
-      [e.target.name]: e.target.value,
+      [e.currentTarget.name]: e.currentTarget.value,
     });
   };
 
@@ -50,14 +51,15 @@ const CreateUserForm = () => {
           ...users,
         }),
       });
+
       const { data, message }: IApiDataProps = await response.json();
 
       if (!response.ok) {
-        errorHandler(message);
+        throw new Error(message);
       }
 
       updateEmployeesWithNewUserData(data);
-      modalHandler(EModalToggleState.hide, EModalComponent.createUserForm);
+      backdropAndmodalsHandler(EBackdropToggleState.hide, EModalComponent.createUserForm);
     } catch (error: any) {
       errorHandler(error.message);
     }
@@ -114,7 +116,9 @@ const CreateUserForm = () => {
         <FormBtnContainer>
           <CloseButton
             type='button'
-            onClick={() => modalHandler(EModalToggleState.hide, EModalComponent.createUserForm)}
+            onClick={() =>
+              backdropAndmodalsHandler(EBackdropToggleState.hide, EModalComponent.createUserForm)
+            }
           >
             Close
           </CloseButton>

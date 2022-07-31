@@ -1,5 +1,5 @@
 import { useErsContext } from '../../store/ers/ErsContext';
-import { EModalComponent, EModalToggleState, IApiDataProps } from '../../ts_ui';
+import { EModalComponent, EBackdropToggleState, IApiDataProps } from '../../ts_ui';
 import {
   ButtonsContainer,
   FormContent,
@@ -9,13 +9,14 @@ import {
 } from './ConfirmDeleteBox.styles';
 
 const ConfirmDelete = () => {
-  const { state, modalHandler, updateEmployeesWithNewUserData, errorHandler } = useErsContext();
+  const { state, backdropAndmodalsHandler, updateEmployeesWithNewUserData, errorHandler } =
+    useErsContext();
 
   const userDeleteHandler = () => {
     const newData = state.employees.filter(employee => employee.id !== state.uniqueUserId);
     updateEmployeesWithNewUserData(newData);
 
-    modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox);
+    backdropAndmodalsHandler(EBackdropToggleState.hide, EModalComponent.confirmDeleteBox);
 
     const deleteUserFromDb = async () => {
       try {
@@ -26,7 +27,7 @@ const ConfirmDelete = () => {
         const { message }: IApiDataProps = await response.json();
 
         if (!response.ok) {
-          errorHandler(message);
+          throw new Error(message);
         }
       } catch (error: any) {
         errorHandler(error.message);
@@ -43,7 +44,12 @@ const ConfirmDelete = () => {
           <ButtonsContainer>
             <NoButton
               type='button'
-              onClick={() => modalHandler(EModalToggleState.hide, EModalComponent.confirmDeleteBox)}
+              onClick={() =>
+                backdropAndmodalsHandler(
+                  EBackdropToggleState.hide,
+                  EModalComponent.confirmDeleteBox
+                )
+              }
             >
               no
             </NoButton>

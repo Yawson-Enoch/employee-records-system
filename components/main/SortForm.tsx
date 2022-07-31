@@ -5,7 +5,7 @@ const SortForm = () => {
   const { sortOptionHandler } = useErsContext();
 
   const onSelectOptionValueChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    sortOptionHandler(e.target.value);
+    sortOptionHandler(e.currentTarget.value);
   };
 
   return (

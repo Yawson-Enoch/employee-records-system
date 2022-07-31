@@ -28,6 +28,12 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const data: IUserInfo[] = await extractEmployeesDB(filePath);
 
+        const findUser = data.find(employee => employee.id === employeeId);
+
+        if (!findUser) {
+          return res.status(404).json({ message: 'no matching user ID.' });
+        }
+
         const updatedList = data.filter(employee => employee.id !== employeeId);
 
         await addToEmployeesDB(filePath, updatedList);
@@ -54,13 +60,9 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const updatedList: IUserInfo[] = data.map(employee => {
           if (employee.id === employeeId) {
-            employee.firstName = firstName;
-            employee.lastName = lastName;
-            employee.email = email;
-            return employee;
-          } else {
-            return employee;
+            return { ...employee, firstName, lastName, email };
           }
+          return employee;
         });
 
         await addToEmployeesDB(filePath, updatedList);

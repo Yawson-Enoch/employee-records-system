@@ -1,10 +1,10 @@
-import { EModalComponent, EModalToggleState, IEditInfo, IUserInfo } from '../../ts_ui';
+import { EModalComponent, EBackdropToggleState, IEditInfo, IUserInfo } from '../../ts_ui';
 
 export const enum EActions {
   FetchEmployees = 'FETCH_EMPLOYEES',
   UpdateEmployees = 'UPDATE_EMPLOYEES',
   Loading = 'LOADING',
-  ModalActive = 'MODAL_ACTIVE',
+  BackdropActive = 'BACKDROP_ACTIVE',
   UniqueUserId = 'UNIQUE_USER_ID',
   Editing = 'EDITING',
   EditInfo = 'EDIT_INFO',
@@ -28,9 +28,9 @@ export type Actions =
       payload: 'show' | 'hide';
     }
   | {
-      type: EActions.ModalActive;
+      type: EActions.BackdropActive;
       payload: {
-        toggleState: EModalToggleState;
+        toggleState: EBackdropToggleState;
         component: EModalComponent;
       };
     }

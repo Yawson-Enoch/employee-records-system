@@ -104,18 +104,20 @@ body[data-theme='light'] {
   --clr-primary: var(--grey-300);
   --clr-secondary: var(--grey-800);
   --clr-accent-tertiary: rgb(212, 228, 250);
+  --clr-shadow: rgba(0, 0, 0, 0.15);
   --border-primary: 2px solid rgba(0, 0, 0, 0.15);
   --box-shadow-outside: 4px 4px 4px var(--grey-200),
-    -4px -4px 4px var(--grey-400);
+  -4px -4px 4px var(--grey-400);
   --box-shadow-inside: inset 4px 4px 4px var(--grey-200),
-    inset -4px -4px 4px var(--grey-400);
+  inset -4px -4px 4px var(--grey-400);
 }
 
 body[data-theme='dark'] {
   --clr-primary: #01040e;
   --clr-secondary: var(--grey-400);
   --clr-accent-tertiary: rgb(1, 5, 15);
-  --border-primary: 2px solid rgba(255, 255, 255, 0.05);
+  --clr-shadow: rgba(255, 255, 255, 0.03);
+  --border-primary: 2px solid rgba(255, 255, 255, 0.07);
   --box-shadow-outside: 4px 4px 4px var(--clr-black),
     -4px -4px 4px var(--grey-900);
   --box-shadow-inside: inset 4px 4px 4px var(--clr-black),

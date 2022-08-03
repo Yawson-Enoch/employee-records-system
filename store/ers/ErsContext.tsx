@@ -61,12 +61,12 @@ const initialAppState: IErsAppState = {
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   const [state, dispatch] = useReducer(ersReducer, initialAppState);
 
-  let url: string = '/api/employees';
+  let url: string = '/api/v1/employees';
   if (state.searchTerm) {
-    url = `/api/employees/search/${state.searchTerm}`;
+    url = `/api/v1/employees/search/${state.searchTerm}`;
   }
   if (state.sortOption) {
-    url = `/api/employees/sort/${state.sortOption}`;
+    url = `/api/v1/employees/sort/${state.sortOption}`;
   }
 
   useEffect(() => {

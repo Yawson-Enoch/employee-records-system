@@ -20,7 +20,7 @@ const ConfirmDelete = () => {
 
     const deleteUserFromDb = async () => {
       try {
-        const response = await fetch(`/api/employees/${state.uniqueUserId}`, {
+        const response = await fetch(`/api/v1/employees/${state.uniqueUserId}`, {
           method: 'DELETE',
         });
 

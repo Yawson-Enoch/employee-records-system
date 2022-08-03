@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { addToEmployeesDB, extractEmployeesDB, pathToDB } from '.';
-import { IFormValues, IUserInfo } from '../../../ts_ui';
-import { checkEmailValidity, checkNameValidity } from '../../../utils';
+import { IFormValues, IUserInfo } from '../../../../ts_ui';
+import { checkEmailValidity, checkNameValidity } from '../../../../utils';
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const filePath = pathToDB();

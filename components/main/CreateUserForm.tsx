@@ -19,14 +19,14 @@ const CreateUserForm = () => {
 
   let initialValues: IFormValues = { firstName: '', lastName: '', email: '' };
   let method: string = 'POST';
-  let url: string = '/api/employees';
+  let url: string = '/api/v1/employees';
 
   if (state.editing) {
     const { firstName, lastName, email } = state.editInfo;
     initialValues = { firstName, lastName, email };
 
     method = 'PATCH';
-    url = `/api/employees/${state.editInfo.id}`;
+    url = `/api/v1/employees/${state.editInfo.id}`;
   }
 
   const [users, setUsers] = useState<IFormValues>(initialValues);

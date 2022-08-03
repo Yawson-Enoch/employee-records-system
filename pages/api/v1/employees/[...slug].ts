@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { extractEmployeesDB, pathToDB } from '.';
-import { IUserInfo } from '../../../ts_ui';
+import { IUserInfo } from '../../../../ts_ui';
 
 const sortedData = (data: IUserInfo[], option: string) => {
   if (option.trim() === 'name') {

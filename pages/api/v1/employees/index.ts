@@ -1,8 +1,8 @@
 import { promises as fs } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
-import { IUserInfo } from '../../../ts_ui';
-import { checkEmailValidity, checkNameValidity, formatDate, formatTime } from '../../../utils';
+import { IUserInfo } from '../../../../ts_ui';
+import { checkEmailValidity, checkNameValidity, formatDate, formatTime } from '../../../../utils';
 import { v4 as uuidv4 } from 'uuid';
 
 interface IData {

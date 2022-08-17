@@ -20,7 +20,7 @@ export const checkNameValidity = (name: string): boolean => {
 };
 
 export const removeRedundantSpacesInAString = (words: string): string => {
-  return words.trim().replaceAll(/\W{2,}/g, ' ');
+  return words.trim().replaceAll(/\s{2,}/g, ' ');
 };
 
 export const capitalizeFirstLetter = (word: string): string => {

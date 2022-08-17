@@ -3,7 +3,7 @@ import EmployeeData from './EmployeeData';
 import {
   EmployeesDetails,
   HomepageWrapper,
-  SearchAndSortOptionsContainer,
+  ModificationOptionsContainer,
   TitlesContainer,
 } from './HomePage.styles';
 import SearchForm from './SearchForm';
@@ -12,10 +12,11 @@ import SortForm from './SortForm';
 const HomePage = () => {
   return (
     <HomepageWrapper>
-      <SearchAndSortOptionsContainer>
+      <ModificationOptionsContainer>
         <SearchForm />
         <SortForm />
-      </SearchAndSortOptionsContainer>
+        <AddButton />
+      </ModificationOptionsContainer>
       <EmployeesDetails>
         <TitlesContainer>
           <li>Name</li>
@@ -26,7 +27,6 @@ const HomePage = () => {
         </TitlesContainer>
         <EmployeeData />
       </EmployeesDetails>
-      <AddButton />
     </HomepageWrapper>
   );
 };

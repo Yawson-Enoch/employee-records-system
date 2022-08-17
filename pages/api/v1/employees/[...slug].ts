@@ -7,9 +7,10 @@ const sortedData = (data: IUserInfo[], option: string) => {
     return data.sort((employeeA, employeeB) =>
       employeeA.firstName > employeeB.firstName ? 1 : -1
     );
-  }
-  if (option.trim() === 'email') {
+  } else if (option.trim() === 'email') {
     return data.sort((employeeA, employeeB) => (employeeA.email > employeeB.email ? 1 : -1));
+  } else {
+    return data;
   }
 };
 

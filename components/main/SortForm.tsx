@@ -13,7 +13,7 @@ const SortForm = () => {
       <div>
         <label htmlFor='sort'>Sort by</label>
         <select name='sort' id='sort' onChange={onSelectOptionValueChange}>
-          <option value=''></option>
+          <option value='date'>date</option>
           <option value='name'>name</option>
           <option value='email'>email</option>
         </select>

@@ -132,12 +132,12 @@ html {
     scroll-behavior: smooth;
   }
 
-  @media (max-width: 300px) {
-    font-size: 50%;
+  @media (max-width: 750px) {
+    font-size: 30%;
   }
 
-  @media (max-width: 150px) {
-    font-size: 30%;
+  @media (max-width: 350px) {
+    font-size: 15%;
   }
 }
 

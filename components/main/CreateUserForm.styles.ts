@@ -12,7 +12,7 @@ export const FormContainer = styled(motion.section).attrs(() => {
     exit: 'hide',
   };
 })`
-  width: 50%;
+  width: 90%;
   margin-inline: auto;
   padding-bottom: var(--space-small);
   position: absolute;
@@ -23,6 +23,10 @@ export const FormContainer = styled(motion.section).attrs(() => {
   z-index: 20;
   background-color: var(--clr-primary);
   border: var(--border-primary);
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 export const FormContainerDetails = styled.div`

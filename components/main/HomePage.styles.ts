@@ -8,7 +8,7 @@ export const HomepageWrapper = styled.div`
   ${FlowContent}
 `;
 
-export const SearchAndSortOptionsContainer = styled.div`
+export const ModificationOptionsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +21,7 @@ export const SearchAndSortOptionsContainer = styled.div`
     border: var(--border-primary);
     border-radius: var(--radius-small);
     padding: 0.1rem 0.3rem;
+    height: 3rem;
   }
 
   select {
@@ -42,10 +43,9 @@ export const EmployeesDetails = styled(motion.div).attrs(() => {
 
 export const TitlesContainer = styled(motion.ul)`
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 3rem;
-  align-items: center;
-  justify-items: center;
+  place-items: center;
   gap: var(--space-xtra-small);
   padding: 1rem 0;
 `;

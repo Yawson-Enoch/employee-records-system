@@ -55,28 +55,32 @@ const initialAppState: IErsAppState = {
   error: false,
   errorMessage: '',
   searchTerm: '',
-  sortOption: '',
+  sortOption: 'date',
 };
 
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   const [state, dispatch] = useReducer(ersReducer, initialAppState);
 
-  let url: string = '/api/v1/employees';
+  let url: string = '/api/v1/employees/sort/date';
+  if (state.sortOption && !state.searchTerm) {
+    url = `/api/v1/employees/sort/${state.sortOption}`;
+  }
   if (state.searchTerm) {
     url = `/api/v1/employees/search/${state.searchTerm}`;
   }
-  if (state.sortOption) {
-    url = `/api/v1/employees/sort/${state.sortOption}`;
-  }
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     const fetchEmployees = async () => {
       dispatch({
         type: EActions.Loading,
-        payload: `${state.searchTerm || state.sortOption ? 'hide' : 'show'}`,
+        payload: 'show',
       });
+
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { signal });
 
         const { data, message }: IApiDataProps = await response.json();
 
@@ -86,12 +90,18 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
 
         dispatch({ type: EActions.FetchEmployees, payload: data });
       } catch (error: any) {
+        if (error.name === 'AbortError') {
+          return;
+        }
         errorHandler(error.message);
       } finally {
         dispatch({ type: EActions.Loading, payload: 'hide' });
       }
     };
     fetchEmployees();
+    return () => {
+      controller.abort();
+    };
   }, [state.searchTerm, state.sortOption]);
 
   // event handlers

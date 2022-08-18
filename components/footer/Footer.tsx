@@ -1,15 +1,15 @@
-import { FooterContent, FooterWrapper } from './Footer.styles';
+import { FooterContent, StyledFooter } from './Footer.styles';
 
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <FooterWrapper>
+    <StyledFooter>
       <FooterContent>
         <p>
-          &copy; <span>{year}</span>
+          &copy; <span>{year} | GyBex</span>
         </p>
       </FooterContent>
-    </FooterWrapper>
+    </StyledFooter>
   );
 };
 

@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import { ContentWrapper } from '../../styles/utils/ContentWrapper';
+import { Wrapper } from '../../styles/utils';
 
-export const FooterWrapper = styled.footer`
-  border-top: 1px solid;
+export const StyledFooter = styled.footer`
+  box-shadow: 0 -5px 5px 0 var(--clr-shadow);
 `;
 
 export const FooterContent = styled.div`
-  ${ContentWrapper}
+  ${Wrapper}
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--gap-lg) 0;
+  padding: var(--space-xtra-small) 0;
 `;

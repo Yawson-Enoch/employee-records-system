@@ -1,56 +1,47 @@
-import { createContext, FC, useContext, useEffect, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from './global-styles';
-import { dark, light } from './theme';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { GlobalStyles } from './global.styles';
 
 interface IAppThemeContext {
   theme: string;
-  switchTheme(): void;
+  themeHandler(): void;
+}
+
+interface IAppThemeContextProviderProps {
+  children: ReactNode;
 }
 
 const AppThemeContext = createContext({} as IAppThemeContext);
 
-const AppThemeProvider: FC = ({ children }) => {
-  // const isServer = typeof window === 'undefined';
-  // not needed if it is run in useEffect
+const setUserPreferredTheme = (): string => {
+  if (typeof window !== 'undefined') {
+    return document.body.dataset.theme as string;
+  }
+  return 'dark';
+};
 
-  const [theme, setTheme] = useState<string>('light');
-  const switchTheme = (): void => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
+export const AppThemeContextProvider = ({ children }: IAppThemeContextProviderProps) => {
+  const [theme, setTheme] = useState<string>(() => setUserPreferredTheme());
+
+  const themeHandler = (): void => {
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   useEffect(() => {
-    // if (!isServer) {
-    const themeFromLocalStorage = localStorage.getItem('theme');
-    if (themeFromLocalStorage) {
-      setTheme(themeFromLocalStorage);
-    } else {
-      setTheme('light');
-    }
-    // }
-  }, []);
-
-  useEffect(() => {
-    // if (!isServer) {
-    localStorage.setItem('theme', theme);
-    // }
+    document.body.dataset.theme = theme;
+    window.localStorage.setItem('theme', theme);
   }, [theme]);
 
   const value: IAppThemeContext = {
     theme,
-    switchTheme,
+    themeHandler,
   };
 
   return (
     <AppThemeContext.Provider value={value}>
-      <ThemeProvider theme={theme === 'light' ? light : dark}>
-        <GlobalStyles />
-        {children}
-      </ThemeProvider>
+      <GlobalStyles />
+      {children}
     </AppThemeContext.Provider>
   );
 };
 
-const useThemeContext = (): IAppThemeContext => useContext(AppThemeContext);
-
-export { AppThemeProvider, useThemeContext };
+export const useAppThemeContext = () => useContext(AppThemeContext);

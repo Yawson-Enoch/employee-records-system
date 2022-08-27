@@ -1,7 +1,15 @@
-import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from 'react';
 import {
-  EModalComponent,
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+} from 'react';
+import {
   EBackdropToggleState,
+  EModalComponent,
   IApiDataProps,
   IEditInfo,
   IUserInfo,
@@ -60,6 +68,7 @@ const initialAppState: IErsAppState = {
 
 const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
   const [state, dispatch] = useReducer(ersReducer, initialAppState);
+  const updateRef = useRef(true);
 
   let url: string = '/api/v1/employees/sort/date';
   if (state.sortOption && !state.searchTerm) {
@@ -74,10 +83,13 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     const signal = controller.signal;
 
     const fetchEmployees = async () => {
-      dispatch({
-        type: EActions.Loading,
-        payload: 'show',
-      });
+      if (updateRef.current) {
+        dispatch({
+          type: EActions.Loading,
+          payload: 'show',
+        });
+        updateRef.current = false;
+      }
 
       try {
         const response = await fetch(url, { signal });

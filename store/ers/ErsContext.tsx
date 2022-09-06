@@ -116,6 +116,20 @@ const ErsContextProvider = ({ children }: IErsContextProviderProps) => {
     };
   }, [state.searchTerm, state.sortOption]);
 
+  // remove modal with escape key
+  useEffect(() => {
+    window.addEventListener('keyup', (e: KeyboardEvent) => {
+      if (e.code === 'Escape') {
+        dispatch({
+          type: EActions.BackdropActive,
+        });
+      }
+    });
+    return () => {
+      window.removeEventListener;
+    };
+  }, []);
+
   // event handlers
   // update employees state after 'POST' | 'PATCH' | 'DELETE' operations
   const updateEmployeesWithNewUserData = (data: IUserInfo[]) => {

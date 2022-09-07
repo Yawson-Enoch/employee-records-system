@@ -3,10 +3,11 @@ import { addToEmployeesDB, extractEmployeesDB, pathToDB } from '.';
 import { IFormValues, IUserInfo } from '../../../../ts_ui';
 import { checkEmailValidity, checkNameValidity } from '../../../../utils';
 
-export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const filePath = pathToDB();
+const filePath = pathToDB();
 
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { employeeId } = req.query;
+
   switch (req.method) {
     case 'GET': {
       try {
@@ -18,10 +19,11 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           return res.status(404).json({ message: 'no matching user ID.' });
         }
 
-        return res.status(200).json({ message: 'success', data: singleUserInfo });
+        res.status(200).json({ message: 'success', data: singleUserInfo });
       } catch (error) {
-        return res.status(500).json({ message: 'error getting data from DB.' });
+        res.status(500).json({ message: 'internal server error, try again later.' });
       }
+      break;
     }
 
     case 'DELETE': {
@@ -38,10 +40,11 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         await addToEmployeesDB(filePath, updatedList);
 
-        return res.status(200).json({ message: 'user deleted successfully.' });
+        res.status(200).json({ message: 'user deleted successfully.' });
       } catch (error) {
-        return res.status(500).json({ message: 'error deleting user.' });
+        res.status(500).json({ message: 'internal server error, try again later.' });
       }
+      break;
     }
 
     case 'PATCH': {
@@ -67,17 +70,19 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         await addToEmployeesDB(filePath, updatedList);
 
-        return res.status(201).json({
+        res.status(201).json({
           message: 'user info successfully edited.',
           data: updatedList,
         });
       } catch (error) {
-        return res.status(500).json({ message: 'error editing user info.' });
+        res.status(500).json({ message: 'internal server error, try again later.' });
       }
+      break;
     }
 
     default: {
-      return res.status(404).json({ message: 'request is not handled.' });
+      res.status(404).json({ message: 'request is not handled.' });
+      break;
     }
   }
 };

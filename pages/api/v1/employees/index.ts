@@ -30,15 +30,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<IData>) => {
     case 'GET': {
       try {
         const data: IUserInfo[] = await extractEmployeesDB(filePath);
-        return res.status(200).json({
+        res.status(200).json({
           message: 'success.',
           data,
         });
       } catch (error) {
-        return res.status(500).json({
-          message: 'error fetching data from DB.',
-        });
+        res.status(500).json({ message: 'internal server error, try again later.' });
       }
+      break;
     }
 
     case 'POST': {
@@ -63,23 +62,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<IData>) => {
 
       try {
         const data: IUserInfo[] = await extractEmployeesDB(filePath);
-        data.push(newUserInfo);
 
-        await addToEmployeesDB(filePath, data);
+        const updatedData = [...data, newUserInfo];
 
-        return res.status(201).json({
+        await addToEmployeesDB(filePath, updatedData);
+
+        res.status(201).json({
           message: 'info successfully added.',
-          data,
+          data: updatedData,
         });
       } catch (error) {
-        return res.status(500).json({
-          message: 'info could not be added.',
-        });
+        res.status(500).json({ message: 'internal server error, try again later.' });
       }
+      break;
     }
 
     default: {
-      return res.status(404).json({ message: 'request not handled.' });
+      res.status(404).json({ message: 'request not handled.' });
+      break;
     }
   }
 };

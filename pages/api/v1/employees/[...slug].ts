@@ -2,26 +2,28 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { extractEmployeesDB, pathToDB } from '.';
 import { IUserInfo } from '../../../../ts_ui';
 
+const filePath = pathToDB();
+
 const sortedData = (data: IUserInfo[], option: string) => {
-  if (option.trim() === 'name') {
+  if (option === 'name') {
     return data.sort((employeeA, employeeB) =>
       employeeA.firstName > employeeB.firstName ? 1 : -1
     );
-  } else if (option.trim() === 'email') {
-    return data.sort((employeeA, employeeB) => (employeeA.email > employeeB.email ? 1 : -1));
-  } else {
-    return data;
   }
+  if (option === 'email') {
+    return data.sort((employeeA, employeeB) => (employeeA.email > employeeB.email ? 1 : -1));
+  }
+  return data;
 };
 
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;
-  const filePath = pathToDB();
 
   switch (req.method) {
     case 'GET': {
       if (slug[0] === 'search') {
         const searchTerm = slug[1].trim().toLowerCase();
+
         try {
           const data: IUserInfo[] = await extractEmployeesDB(filePath);
 
@@ -38,7 +40,7 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             data: updatedList,
           });
         } catch (error) {
-          return res.status(500).json({ message: 'error getting data from DB.' });
+          return res.status(500).json({ message: 'internal server error, try again later.' });
         }
       }
 
@@ -55,13 +57,16 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             data: updatedList,
           });
         } catch (error) {
-          return res.status(500).json({ message: 'error getting data from DB.' });
+          return res.status(500).json({ message: 'internal server error, try again later.' });
         }
       }
+      res.status(404).json({ message: 'not found.' });
+      break;
     }
 
     default: {
-      return res.status(404).json({ message: 'request is not handled.' });
+      res.status(404).json({ message: 'unhandled request.' });
+      break;
     }
   }
 };

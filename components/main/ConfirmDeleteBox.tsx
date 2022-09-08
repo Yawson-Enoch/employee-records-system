@@ -50,6 +50,7 @@ const ConfirmDelete = () => {
                   EModalComponent.confirmDeleteBox
                 )
               }
+              autoFocus
             >
               no
             </NoButton>

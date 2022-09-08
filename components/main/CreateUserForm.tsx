@@ -119,6 +119,7 @@ const CreateUserForm = () => {
             onClick={() =>
               backdropAndmodalsHandler(EBackdropToggleState.hide, EModalComponent.createUserForm)
             }
+            autoFocus
           >
             Close
           </CloseButton>

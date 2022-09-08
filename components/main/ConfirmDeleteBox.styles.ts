@@ -46,6 +46,10 @@ export const ButtonsContainer = styled.div`
 export const NoButton = styled(GenericButton)`
   background-color: var(--blue-500);
   color: var(--clr-white);
+
+  &:focus {
+    outline: 2px solid var(--clr-accent-primary);
+  }
 `;
 
 export const YesButton = styled(GenericButton)`

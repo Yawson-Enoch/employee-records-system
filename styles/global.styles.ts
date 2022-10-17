@@ -151,11 +151,10 @@ html {
 
 :focus {
   outline: none;
-  border: none;
 }
 
 :focus-visible {
-  outline: 1px solid var(--clr-accent-primary);
+  outline: 2px solid var(--clr-accent-primary);
 }
 
 body {

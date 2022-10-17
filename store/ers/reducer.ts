@@ -17,14 +17,14 @@ export const ersReducer = (state: IErsAppState, action: Actions): IErsAppState =
 
     case EActions.BackdropActive: {
       if (
-        action.payload.toggleState === EBackdropToggleState.show &&
-        action.payload.component === EModalComponent.createUserForm
+        action?.payload?.toggleState === EBackdropToggleState.show &&
+        action?.payload?.component === EModalComponent.createUserForm
       ) {
         return { ...state, backdropActive: true, createUserFormActive: true };
       }
       if (
-        action.payload.toggleState === EBackdropToggleState.show &&
-        action.payload.component === EModalComponent.confirmDeleteBox
+        action?.payload?.toggleState === EBackdropToggleState.show &&
+        action?.payload?.component === EModalComponent.confirmDeleteBox
       ) {
         return { ...state, backdropActive: true, confirmDeleteBoxActive: true };
       }

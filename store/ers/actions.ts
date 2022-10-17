@@ -29,7 +29,7 @@ export type Actions =
     }
   | {
       type: EActions.BackdropActive;
-      payload: {
+      payload?: {
         toggleState: EBackdropToggleState;
         component: EModalComponent;
       };

@@ -51,6 +51,18 @@ export const FormField = styled.div`
     font-size: 1.5rem;
   }
 
+  input:valid:not(:placeholder-shown) + label {
+    color: var(--clr-success);
+  }
+
+  input:invalid:not(:placeholder-shown) + label {
+    color: var(--clr-error);
+  }
+
+  input:valid:not(:placeholder-shown) {
+    border-color: var(--clr-success);
+  }
+
   input:invalid:not(:placeholder-shown) {
     border-color: var(--clr-error);
     ~ div {

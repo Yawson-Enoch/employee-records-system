@@ -12,7 +12,7 @@ const Header = () => {
       <HeaderContent>
         <Link href='/'>
           <a>
-            <Logo>Employee Records System</Logo>
+            <Logo>ERS</Logo>
           </a>
         </Link>
         <ThemeTogglerAndNav>
